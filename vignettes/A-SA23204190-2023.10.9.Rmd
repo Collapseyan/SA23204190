@@ -1,0 +1,165 @@
+---
+title: "Homework3"
+author: "SA23204190"
+date: "2023-10-9"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+针对简单估计与分层估计：
+$$Var(\hat{\theta}^M)=\frac{1}{Mk}\sum_{i=1}^{k}\delta_i^2+Var(\theta_I)=Var(\hat{\theta}^S)+Var(\theta_I)$$
+其中$\theta_i=E[g(U)|I=i],\delta_i^2=Var[g(U)|I=i]$,并且I服从集合$\{1,...,k\}$上的均匀分布。
+求证如果g是(a,b)上连续函数，则有
+$$Var(\hat{\theta}^S)/Var(\hat{\theta}^M) \rightarrow 0\ 当b_i-a_i \rightarrow0\ 对于i=i,...,k$$
+
+## Answer1
+
+证明过程：
+$$Var(\hat{\theta}^S)/Var(\hat{\theta}^M)=\frac{\sum_{i=1}^k\delta_i^2}{\sum_{i=1}^k\delta_i^2+kVar(\theta_I)}$$
+$b_i-a_i \rightarrow0$时候有$k\rightarrow+\infty$,则分层估计与简单估计方差之比可以化简为：
+$$\frac{\sum_{i=1}^k\delta_i^2}{\sum_{i=1}^k\delta_i^2+kVar(\theta_I)}$$
+要证明方差之比趋于0，只需要证明$\sum_{i=1}^k\delta_i^2<+\infty,\ k\rightarrow+\infty$
+
+## Question2
+
+找到两个被定义在$(1,+\infty)重要性函数$f_1,f_2$。并且足够接近$$g(x)=\frac{x^2}{\sqrt{2\pi}}e^{-x^2/2},x>1$$
+通过重要性采样计算哪一个重要性函数有更小的估计方差，给出解释。
+
+
+## Answer2
+
+解题过程：
+首先选取两个重要性函数:
+$$f_1=e^{-(x-1)},x>1$$
+$$f_2=\frac{1}{2}e^{-\frac{1}{2}(x-1)},x>1$$
+```{r}
+m<-1e6;est<-sd<-numeric(2)
+g<-function(x){x*x*(2*pi)^(-0.5)*exp(-0.5*x^2)}*(x>1)
+f1<-function(x){exp(-(x-1))}
+f2<-function(x){0.5*exp(-0.5*(x-1))}
+x<-rexp(m,1)+1
+est[1]<-mean(g(x)/f1(x))
+sd[1]<-sd(g(x)/f1(x))
+x<-rexp(m,0.5)+1
+est[2]<-mean(g(x)/f2(x))
+sd[2]<-sd(g(x)/f2(x))
+res <- rbind(est=round(est,3), sd=round(sd,3))
+  colnames(res) <- paste0('f',1:2)
+  res
+x<-seq(1,10,0.01)
+w<-2
+plot(x,g(x),type="l",ylim=c(0,1.5),lwd= w,col=1,main = '(A)')
+lines(x,f1(x),lty=2,lwd=w,col=2)
+lines(x,f2(x),lty=3,lwd=w,col=3)
+```
+
+最终计算结果显示采用$f_1$做估计的方差更小。原因是因为曲线$f_1$比曲线$f_2$更平行于$g$的曲线
+
+## Question3
+
+通过重要性采样的方法获得如下积分的蒙特卡洛估计：$$\int_1^{+\infty}\frac{x^2}{\sqrt{2\pi}}e^{-x^2/2}dx$$
+
+## Answer3
+
+解题过程：
+首先选取重要性函数：
+$$f_1=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$$
+```{r}
+m<-1e7
+g<-function(x){x*x*(2*pi)^(-0.5)*exp(-0.5*x^2)}*(x>1)
+f1<-function(x){(2*pi)^(-0.5)*exp(-0.5*x^2)}
+x<-rnorm(m)
+paste("采用重要性采样方法得到的估计值为：",mean(g(x)/f1(x)))
+```
+
+
+## Question4
+
+获得习题5.13中的分层重要性抽样估计，并将其与习题5.10的结果进行比较。
+
+
+## Answer4
+
+解题过程：
+对于习题5.13的积分$\int_1^{\infty}\frac{x^2}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx$,积分域为$(1,+\infty)$，直接使用分层抽样比较困难，所以使用换元法做$t=\frac{1}{x}$，则原积分变为：
+$$\int_0^1 \frac{1}{t^4\sqrt{2\pi}}e^{-\frac{1}{2t^2}}dt$$
+然后使用分层抽样
+```{r}
+M <- 10000; k <- 10 
+r <- M/k 
+N <- 50 
+T2 <- numeric(k)
+est <- matrix(0, N, 2)
+g<-function(x){x^(-4)*(2*pi)^(-0.5)*exp(-0.5*x^(-2))*(x<1)*(x>0)}
+for (i in 1:N) {
+     est[i, 1] <- mean(g(runif(M)))
+     for(j in 1:k){T2[j]<-mean(g(runif(M/k,(j-1)/k,j/k)))}
+     est[i, 2] <- mean(T2)
+ }
+round(apply(est,2,mean),4)
+```
+
+## Question5
+
+假设使用95%对称t区间来估计一个均值，但样本数据不服从正态分布。那么均值落入置信区间的概率不一定等于0.95。使用蒙特卡罗实验估计t区间对$\chi^2(2)$数据中大小为20的随机样本的覆盖率。将得到的t区间结果与例6.4中的模拟结果进行比较。(t区间和方差区间相比应该具有更稳定的正态性偏离)
+
+## Anwser5
+
+解题过程：
+```{r}
+m<-1e5;k<-1;num<-0
+set.seed(12345)
+while (k<=m) {
+  x<-rchisq(20,2)
+  x1<-mean(x)-sd(x)*20^(-0.5)*qt(0.975,19)
+  x2<-mean(x)+sd(x)*20^(-0.5)*qt(0.975,19)
+  if(2<=x2){
+    if(2>=x1){
+      num<-num+1
+    }
+  }
+  k<-k+1
+}
+prb=num/m
+prb
+```
+最终计算结果覆盖概率小于0.95，覆盖概率没有例6.4的计算结果好
+
+## Question6
+
+当抽样总体非正态时，使用蒙特卡洛模拟来研究t检验的经验第一类错误率是否约等于理论显著性水平$\alpha$。t检验对微小的正态性偏差是稳定的。讨论对下列抽样总体进行模拟的结果：(i)$\chi^2(1)$;(ii)Uniform(0,2);(iii)Exponential(1)。在每种情况下检验$$H_0:\mu=\mu_0,H_1:\mu \neq\mu_0$$其中$\mu_0$是对应的总体均值。
+
+## Answer6
+
+解题过程：
+```{r}
+alpha<-0.05
+m<-1e5;num1<-num2<-num3<-0
+for (i in 1:m) {
+  x1<-rchisq(20,1)
+  x2<-runif(20,0,2)
+  x3<-rexp(20,1)
+  T1<-20^(0.5)*(mean(x1)-1)/sd(x1)
+  T2<-20^(0.5)*(mean(x2)-1)/sd(x2)
+  T3<-20^(0.5)*(mean(x3)-1)/sd(x3)
+  if(abs(T1)>qt(0.975,19)){
+    num1<-num1+1
+  }
+  if(abs(T2)>qt(0.975,19)){
+    num2<-num2+1
+  }
+  if(abs(T3)>qt(0.975,19)){
+    num3<-num3+1
+  }
+}
+c<-c(num1/m,num2/m,num3/m)
+paste("(i)(ii)(iii)的结果分别为：",c[1],c[2],c[3])
+```

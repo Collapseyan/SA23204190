@@ -1,0 +1,17 @@
+Package: SA23204190
+Type: Package
+Title: What the Package Does in One 'Title Case' Line
+Version: 1.0
+Date: 2023-12-04
+Author: Your Name
+Maintainer: Your Name <your@email.com>
+Description: One paragraph description of what the package does as one or more full sentences.
+License: GPL (>= 2)
+Imports: Rcpp, microbenchmark
+Suggests: knitr, rmarkdown, DAAG, boot, bootstrap, ggplot2, reshape
+VignetteBuilder: knitr, DAAG, boot, bootstrap, ggplot2, reshape
+LinkingTo: Rcpp
+RoxygenNote: 7.2.3
+Encoding: UTF-8
+URL: http://github.com/Collapseyan/SA23204190
+BugReports: http://github.com/Collapseyan/SA23204190/issues

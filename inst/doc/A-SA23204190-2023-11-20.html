@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="SA23204190" />
+
+<meta name="date" content="2023-11-20" />
+
+<title>Homework9</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework9</h1>
+<h4 class="author">SA23204190</h4>
+<h4 class="date">2023-11-20</h4>
+
+
+
+<div id="question1" class="section level2">
+<h2>Question1</h2>
+<p>为什么使用unlist()把表转化为原子向量，为什么不用as.vector()？</p>
+</div>
+<div id="answer1" class="section level2">
+<h2>Answer1</h2>
+<p>unlist()将表转化为一个向量，as.vector()可能会将表格分为多个向量。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>u<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">unlist</span>(u)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">as.vector</span>(u)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3
+## 
+## [[4]]
+## [1] 4</code></pre>
+</div>
+<div id="question2" class="section level2">
+<h2>Question2</h2>
+<p>对于dim()输入向量，返回值是什么？</p>
+</div>
+<div id="answer2" class="section level2">
+<h2>Answer2</h2>
+<p>NULL</p>
+</div>
+<div id="question3" class="section level2">
+<h2>Question3</h2>
+<p>如果is.matrix(x)的返回值为TRUE,那么is.array(x)的返回值会是？</p>
+</div>
+<div id="answer3" class="section level2">
+<h2>Answer3</h2>
+<p>TRUE</p>
+</div>
+<div id="question4" class="section level2">
+<h2>Question4</h2>
+<p>对于as.matrix()，输入一个包含不同数据类型的数据框，会输出什么？</p>
+</div>
+<div id="answer4" class="section level2">
+<h2>Answer4</h2>
+<p>输出一个数据类型为字符型的矩阵</p>
+</div>
+<div id="question5" class="section level2">
+<h2>Question5</h2>
+<p>能够得到一个0行的数据框吗，0列呢？</p>
+</div>
+<div id="answer5" class="section level2">
+<h2>Answer5</h2>
+<p>可以</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>test<span class="ot">=</span><span class="fu">matrix</span>(<span class="at">data=</span><span class="cn">NA</span>,<span class="at">nrow =</span> <span class="dv">0</span>,<span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>test<span class="ot">=</span><span class="fu">as.data.frame</span>(test)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">colnames</span>(test)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;col1&quot;</span>,<span class="st">&quot;col2&quot;</span>,<span class="st">&quot;col3&quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>test</span></code></pre></div>
+<pre><code>## [1] col1 col2 col3
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>test2<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>,<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol =</span> <span class="dv">0</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>test2<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(test2)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">rownames</span>(test2)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;row1&quot;</span>,<span class="st">&quot;row2&quot;</span>,<span class="st">&quot;row3&quot;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>test2</span></code></pre></div>
+<pre><code>## data frame with 0 columns and 3 rows</code></pre>
+</div>
+<div id="question6" class="section level2">
+<h2>Question6</h2>
+<p>下面是一个数据缩放函数，如何将其应用到数据框的每一列，如何将其应用到数据框的每一数字列</p>
+<p>scale01 &lt;- function(x) { rng &lt;- range(x, na.rm = TRUE) (x -
+rng[1]) / (rng[2] - rng[1]) }</p>
+</div>
+<div id="answer6" class="section level2">
+<h2>Answer6</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>scale01 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  rng <span class="ot">&lt;-</span> <span class="fu">range</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  (x <span class="sc">-</span> rng[<span class="dv">1</span>]) <span class="sc">/</span> (rng[<span class="dv">2</span>] <span class="sc">-</span> rng[<span class="dv">1</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>}</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>     <span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;李明&quot;</span>, <span class="st">&quot;张聪&quot;</span>, <span class="st">&quot;王建&quot;</span>), </span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>     <span class="at">age=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">28</span>), </span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>     <span class="at">height=</span><span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">162</span>, <span class="dv">175</span>),</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>     <span class="at">stringsAsFactors=</span><span class="cn">FALSE</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="fu">lapply</span>(d[<span class="fu">lapply</span>(d,is.numeric)<span class="sc">==</span><span class="cn">TRUE</span>],scale01)</span></code></pre></div>
+<pre><code>## $age
+## [1] 0.2857143 1.0000000 0.0000000
+## 
+## $height
+## [1] 1.0000000 0.0000000 0.7222222</code></pre>
+</div>
+<div id="question7" class="section level2">
+<h2>Question7</h2>
+<p>使用vapply() a):计算数据框中每一列的标准差。
+b):计算混合数据框中每一个数字列的标准差。</p>
+</div>
+<div id="answer7" class="section level2">
+<h2>Answer7</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#对于数据框</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>d1<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="fu">vapply</span>(d1,sd,<span class="fu">numeric</span>(<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>##     X1.5   X1.5.1 
+## 1.581139 1.581139</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#针对混合数据框</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>     <span class="at">name=</span><span class="fu">c</span>(<span class="st">&quot;李明&quot;</span>, <span class="st">&quot;张聪&quot;</span>, <span class="st">&quot;王建&quot;</span>), </span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>     <span class="at">age=</span><span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">28</span>), </span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>     <span class="at">height=</span><span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">162</span>, <span class="dv">175</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>     <span class="at">stringsAsFactors=</span><span class="cn">FALSE</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">vapply</span>(d[<span class="fu">lapply</span>(d,is.numeric)<span class="sc">==</span><span class="cn">TRUE</span>],sd,<span class="fu">numeric</span>(<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>##      age   height 
+## 3.605551 9.291573</code></pre>
+</div>
+<div id="question8" class="section level2">
+<h2>Question8</h2>
+<p>现有二元密度函数 <span class="math display">\[f(x,y)\propto
+\begin{pmatrix} n \\ x
+\end{pmatrix}y^{x+\alpha-1}(1-y)^{n-x+b-1},\  x=0,1,...,n,0\leq y\leq 1
+\]</span>
+可以看出，对于固定的a,b,n,条件分布为Binomial(n,y)和Beta(x+a,n-x+b)，使用Gibbs样本生成器生成一个目标联合密度为f(x,y)的链条。</p>
+</div>
+<div id="answer8" class="section level2">
+<h2>Answer8</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">5000</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>burn<span class="ot">&lt;-</span><span class="dv">1000</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,N,<span class="dv">2</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>a<span class="ot">&lt;-</span>b<span class="ot">&lt;-</span><span class="dv">3</span>;n<span class="ot">&lt;-</span><span class="dv">100</span><span class="co">#固定a=3,b=3,n=100</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>X[<span class="dv">1</span>,]<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.5</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) {</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>  x2<span class="ot">&lt;-</span>X[i<span class="dv">-1</span>,<span class="dv">2</span>]</span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>  X[i,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">rbinom</span>(<span class="dv">1</span>,n,x2)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>  x1<span class="ot">&lt;-</span>X[i,<span class="dv">1</span>]</span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>  X[i,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">rbeta</span>(<span class="dv">1</span>,x1<span class="sc">+</span>a,n<span class="sc">-</span>x1<span class="sc">+</span>b)</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>}</span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>b<span class="ot">&lt;-</span>burn<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>x<span class="ot">&lt;-</span>X[b<span class="sc">:</span>N,]</span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="fu">plot</span>(x,<span class="at">main =</span> <span class="st">&quot;&quot;</span>,<span class="at">cex=</span>.<span class="dv">5</span>,<span class="at">xlab =</span> <span class="fu">bquote</span>(X[<span class="dv">1</span>]),</span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="fu">bquote</span>(X[<span class="dv">2</span>]),<span class="at">ylim =</span> <span class="fu">range</span>(x[,<span class="dv">2</span>]))</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAZlBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6AGY6kNtmAABmAGZmOjpmZjpmZrZmkJBmtv+QOgCQOjqQOmaQZgCQ2/+2ZgC2Zma2/7a2///bkDrb/7bb////tmb/25D//7b//9v////fmmgMAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAIpUlEQVR4nO2d7ZbbJhRFyXTGbTxtM24bd6LGlvX+L1khJH8KzkW6CGyf/SMry8JwvX1BICGPaUgQkzuA0qEgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQBlQeZuyCVIt7p0LCwo/ovJwyk+ZtAY5hQgBY1hmmOSU9AI/SDQxUhBF3RpY1wKUdAtLnFMn0PuJfF7lUPRrU6Dy8kPB+lrPBNECurxTaEpqB+Yr+1Q0ECv48zMEl1sa8zbYdM286FSnT4nAWasd53CSyOoev3ZOnprmnr9VaE6fdyZPHBR4bykuEoxh02rZffle+NUza0uAWZwlEdQvW571u7lRzP8O6+6FJjRrnW08+wZNJyncAKlHoM6VbOr0+bibBXU82xnMffZw3aWEbR0deJGxyaFl6PPUwsyo7Pmi9QxV7GlFlSVdBYzYPDpC00L9BEu2odHnmN+Xb5HXLlyrLrVodbA0NOnVnclceEutlB1sDF04urzZzFB3Sm+xTMCLS1IRrNcF6tMPz/cmRImijI94zGlW2o4ilhqFCeoW6w6ilisyvSMh/TwGSTLHl/+pBuD+hTKPgaJ7Bh39WxeoHGfqF67xj35s5QgUfoYv52YQO9qHjRMDKUJpBHoPQkasmKunKhA70oQvCR2pkgr0LsSJNLT39fQCvTeBInS50m7mFCOcqAUpFUwS3VDrZLrPk8sqL+go+nnwQRJSRFo+YKEbsoWNOlLjKsY5Y5g7nNRsXrBXNXJDUW1ffeC+rvJ8hR6sgwaMqKoLrZfdZvH3n13LFTbRfUMSSFOn/Rd7LD5sJeayxEk7lx47T4j0FPBzkz9/pld0PFzy3LH9bBkgZ5l0F9261j9+2+ZBYkHZtfYxJnFtDHIXpL33dBRbjdUhbx3LRDoZcF/58iJatdbQQSLBGqa+s/h//vVrOyJatf7/gg9C2VQve72rdoNiLP9TI95eKCrQEF2y8bbMAsS4Qaree3evs/EriyW6mKNvVH65Q/T51GA4bahRfnefJSd2ekTE6gr6JII0t9xTpBBDdgBfqVnZvrEBNoVrGwGSQagem1vOqcQFHf+mj+biBHU9pzuAR7fhoQLtm1PVBckzx2jMPzEBRp9FqvMV2VBUb1rwsJ9XqDx86D96hdVQTHZk0XQOaKZdDuiqwoSm+n9TF5/TQo09wWzqOHH6F3zTi1I61GEiGuqjWRXS0TD2gXDtUz5hs/6jSx1NO+Z3EEXizp35Qv0TgTF5aZmoHHtaj6KYKRd7Lj1TpM0gjQfRYhYm+rMfCYGGtOu6kZyQf6cJj6q43NcoDENqz6KIE0fbTOxgebNIFnvSkGqMUjvUQSBHNGG54kkOoupPIog7lwpn4AteB4k3Oqc1s+dC3KSdCOLDzSyoFJ1gqlhE78dKkGg0QU1qjOiR1FSJ48g0CkFFaqTPoeygJ8iBRnQvZKsuaYEOq3grOqG9ZQkgZahLEHucqBsdF6I8gRhOwnW7LGBzik4pzpJ1+ol6oYTG+icgtOrkz1m2jy0oMsPet1C+Ox18vKcXQzlz/nI/IyD9FmWeLtWDsoRBCbQus3LKUdQkOXGnJu41AtOrM4/8iw7MbyJS73gxOp8/atZdEi+pRxBoyN0vq51jEu94KTqxvSc3e3KSH5BvvlP0nsVcrILGtcz7dmuFJQoqCmjczkSCYrY3XHdxVQ27+qR6s6qfHfHbfrEtJScJIKk9+avkqcpZFy+IIkg4e6OkYEnopGFyJlB5/lTYvJ0pBqDJLs7TrPBQuVYEp3FZLs7LrtYmeScB502Z5TrpwxB5epJLyj4KEL5eoq6q1Em2ddipUNBgGyL1bshiSC8WBVWigrMPT6/ggklG8lSQ1jpgwoSLFaFlT6oIGYQAi9WhZU+qiC8WBVW+rCCtCqloJkFKCjx8dIFPRIUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIoC9oZ/w/LNzdNvoaLrXtrsZ5ju9Xxv0sr+/9VdvABwojBnVBuzasnSe0w6Y9UNlP6C+16y5Xeo7v2mP1OvD+yr5uDYXCiEJbkLuwvx3/8WX3I7DVyw9/qXptBXmOu5cD7z9s3tzrwTCi0BZ0dOAv0n6x/lLV6z+tIM/x/a/fw60cBQnCEKIuqPsMwdtm25cf3lLtATsGeY7vXj7X3Rjmff/QxQRhCNEW5Pp9qPfbW0a+UrZnWEGe45XdFGCzxN9KPzbjMKQsLmg3jNFjpez9yJCgL31eeFtps7PtXv5vIJ6lu5i75egp1b0c6GJuTGnHF18rx6Gn3C4GRsfq/M8G3JSq+q0pH57j7gO3H97XyjFxyh2kw+fX4d51qNTWf5p3uyd2/tP88c8TlXuaD87Q7OgAS20DE8VqkOd7/zAGlTtR7PqJL7C+C9nD/lJuqeE5vhuWKr73b1GBWLhYBVAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhQsKD9yj0aW/n/cvICFCxo2OiwCj5hnZqSBXU3kt2msXwULcju19TYoTGHogW13eub/2/bL0PZgk6/N5ONsgUdNv6fKlqIsgVtX/9b5x2jyxZkN/T2v6NSv2fKpJIF7VfdtnC7D6pe5+pqBQs6bDop9fr15+HvT2bQNe0A7c7w3c5qdjEABQEoCEBBAAoqFQoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCPA/I1VVxea1K1UAAAAASUVORK5CYII=" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

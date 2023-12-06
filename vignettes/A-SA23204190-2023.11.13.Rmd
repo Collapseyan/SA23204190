@@ -1,0 +1,119 @@
+---
+title: "Homework8"
+author: "SA23204190"
+date: "2023-11-13"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework8}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+设$X_1,X_2,...,X_n$~$Exp(\lambda)$,i.i.d。因为某种原因，只知道$X_i$落在某个区间$(u_i,v_i)$,其中$u_i<v_i$是两个非随机的已知常数。这种数据称为区间删失数据。
+
+(1)试分别直接极大化观测数据的似然函数和采用EM算法求解$\lambda$的MLE,证明EM算法收敛于观测数据的MLE，并且收敛具有线性速度。
+
+(2)设$(u_i,v_i),i=1,...,n(=10)$的观测值为$(11,12),(8,9),(27,28),(13,14),(16,17),(0,1),(23,24),(10,11),(24,25),(2,3)$。试分别编程实现上述两种算法得到$\lambda$的MLE的数值解。
+
+## Answer1
+
+(1):
+\begin{eqnarray}	\label{eq}
+	L(X,\theta)&=&\prod_{i=1}^{n}P(u_i<X_i<v_i) \nonumber \\
+	~&=&\prod_{i=1}^{n}(e^{-\lambda u_i}-e^{-\lambda v_i}) \nonumber \\
+\end{eqnarray}
+有
+$$\frac{\partial logL}{\partial \theta}=\sum_{i=1}^n \frac{v_ie^{-\lambda v_i}-u_i e^{-\lambda u_i}}{e^{-\lambda u_i}-e^{-\lambda v_i}}=0$$
+该方程的解就是$\lambda$的MLE。
+
+(2)
+```{r}
+u<-c(11,8,27,13,16,17,0,23,10,24,2)
+v<-c(12,9,28,14,17,18,1,24,11,25,3)
+
+f<-function(lambda){
+  sum((v*exp(-lambda*v)-u*exp(-lambda*u))/(exp(-lambda*u)-exp(-lambda*v)))
+}
+
+uniroot(f,interval = c(0.05,1))
+```
+
+## Question2
+
+在猜拳游戏中，如果将支付矩阵的每个元减去一个常数或者将支付矩阵的每一个元乘以一个正的常数，那么最佳策略集并不会改变。但是单纯形法可能在一个不同的基本可行点(也是最佳的)终止。计算“B<-A+2”找到博弈B的解，验证它是原来博弈A的端点，给出博弈A和博弈B的值。
+
+## Answer2
+
+```{r}
+
+library(boot)
+A<-matrix(c(0,-2,-2,3,0,0,4,0,0,
+            2,0,0,0,-3,-3,4,0,0,
+            2,0,0,3,0,0,0,-4,-4,
+            -3,0,-3,0,4,0,0,5,0,
+            0,3,0,-4,0,-4,0,5,0,
+            0,3,0,0,4,0,-5,0,-5,
+            -4,-4,0,0,0,5,0,0,6,
+            0,0,4,-5,-5,0,0,0,6,
+            0,0,4,0,0,5,-6,-6,0),9,9)
+
+  min.A<-min(A)
+  A<-A-min.A
+  max.A<-max(A)
+  A<-A/max(A)
+  m<-nrow(A)
+  n<-ncol(A)
+  it<-n^3
+  a<-c(rep(0,m),1)
+  A1<- -cbind(t(A),rep(-1,n))
+  b1<-rep(0,n)
+  A3<-t(as.matrix(c(rep(1,m),0)))
+  b3<-1
+  sx<-simplex(a=a,A1=A1,b1=b1,A3=A3,b3=b3,
+              maxi=TRUE,n.iter=it)
+  a<-c(rep(0,n),1)
+  A1<-cbind(A,rep(-1,m))
+  b1<-rep(0,m)
+  A3<-t(as.matrix(c(rep(1,n),0)))
+  b3<-1
+  sy<-simplex(a=a,A1=A1,b1=b1,A3=A3,b3=b3,
+              maxi=FALSE,n.iter=it)
+  soln<-list("A" = A * max.A + min.A,
+             "x" = sx$soln[1:m],
+             "y" = sy$soln[1:n],
+             "v" = sx$soln[m+1] * max.A + min.A)
+  round(cbind(soln$x,soln$y),7)
+  
+  
+  B<-A+2
+  min.B<-min(B)
+  B<-B-min.B
+  max.B<-max(B)
+  B<-B/max(B)
+  a1<-c(rep(0,m),1)
+  B1<- -cbind(t(B),rep(-1,n))
+  b12<-rep(0,n)
+  B3<-t(as.matrix(c(rep(1,m),0)))
+  c3<-1
+  sx<-simplex(a=a1,A1=B1,b1=b12,A3=B3,b3=c3,
+              maxi=TRUE,n.iter=it)
+  a1<-c(rep(0,n),1)
+  B1<-cbind(B,rep(-1,m))
+  b12<-rep(0,m)
+  B3<-t(as.matrix(c(rep(1,n),0)))
+  c3<-1
+  sy<-simplex(a=a1,A1=B1,b1=b12,A3=B3,b3=c3,
+              maxi=FALSE,n.iter=it)
+  soln1<-list("B" = B * max.B + min.B,
+             "x" = sx$soln[1:m],
+             "y" = sy$soln[1:n],
+             "v" = sx$soln[m+1] * max.B + min.B)
+  round(cbind(soln1$x,soln1$y),7)
+  
+```

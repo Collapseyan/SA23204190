@@ -1,0 +1,79 @@
+---
+title: "Homework0"
+author: "SA23204190"
+date: "2023-9-11"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework0}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+在饲料养鸡增肥研究中，某研究所提出三种饲料配方，分别记为$A_1,A_2,A_3$。为了比较三种饲料的效果，特选24只相似雏鸡随机均分为三组，每组各喂一种饲料，60天后观察它们的质量，结果如下表：(单位：g)
+```{r echo=FALSE}
+dataWeight<-data.frame("Feed"=c("A_1","A_2","A_3"),"W.1"=c(1073,1107,1093),"W.2"=c(1009,1092,1029),"w.3"=c(1060,990,1080),"W.4"=c(1001,1109,1021),"W.5"=c(1002,10900,1022),"W.6"=c(1012,1074,1032),"W.7"=c(1009,1122,1029),"W.8"=c(1028,1001,1048))
+dataWeight
+```
+判断三种饲料对于鸡增肥效果是否相同。
+
+## Answer1
+解题思路：该问题为单因子试验下的方差分析问题。
+
+解题过程：对于三个因子水平$A_1,A_2,A_3$,做如下假设：每个因子水平下，鸡重量服从方差相等的正态分布，记为$N(\mu_i,\delta^2),i=1,2,3$，并且样本之间都是相互独立的。
+作假设检验：$$H_0:\mu_1=\mu_2=\mu_3$$
+检验统计量$F=\frac{S_A/f_A}{S_e/f_e}$服从$F(f_A,f_e)$。其中$S_A$为因子偏差平方和，$f_A$为其自由度；$S_e$为误差偏差平方和，$f_e$是其自由度。
+使用r计算F统计量的值
+```{r}
+library(reshape)
+data1<- melt(dataWeight,id="Feed")#数据整理
+data1<- data1[,-2]
+
+data1#数据展示，包括因子水平以及因子水平下鸡的重量
+aov.chick=aov(value~Feed,data = data1)#做单因子方差分析
+summary(aov.chick)##结果展示
+```
+```{r echo=FALSE}
+F<-summary(aov.chick)[[1]][["F value"]][[1]]
+p<-summary(aov.chick)[[1]][["Pr(>F)"]][[1]]
+paste("该检验的F统计量的值为：",F,";对应的p值为：",p,"。",collapse = "//")
+```
+
+## Question2
+生成1000个服从$U(0,1)$的随机数，从其出发得到一组分布函数是服从Exp(1)的随机样本，并且画出样本的直方图，同时叠加理论概率密度函数曲线
+
+## Answer2
+解题思路：随机数生成问题。使用逆变法，计算出Exp(1)分布函数的反函数：$F^{-1}(x)=-\ln(1-x)$。则$Y=F^{-1}(X)$即是满足分布函数服从Exp(1)的随机样本。（X指服从U(0,1)的随机样本）
+
+解题过程：
+```{r}
+u<-runif(1000)#生成1000个服从U(0,1)的随机数
+x<- -log(1-u)#x即是服从Exp(1)的随机样本
+hist(x,prob=T,xlim=c(0,5),main=expression(f(x)==exp(-x)))
+curve(exp(-x),col="red",add=T)#得到直方图与曲线
+```
+
+
+## Question3
+合金钢的强度y（单位：$10^7Pa$）与合金钢中碳的含量x（单位：%）有关。现在收集一组关于合金钢强度y与碳含量x的数据如下，拟合出线性模型，并且画出散点图与拟合的曲线。
+```{r echo=FALSE}
+dataCarbon<-data.frame("x"=c(0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.20,0.21,0.23),"y"=c(42,43,45,45,45,47.5,49,53,50,55,55,60))
+dataCarbon
+```
+## Answer3
+解题思路：使用线性回归模型，做出模型后在散点图中叠加拟合直线。
+
+解题过程：
+```{r}
+library(ggplot2)
+sclm<-lm(y~x,data = dataCarbon)#，根据问题中给出的数据集dataCarbon建立线性模型
+summary(sclm)#线性模型结果展示
+ggplot(dataCarbon, aes(x, y))+
+  geom_point()+
+  geom_smooth(method = "lm", se = F)#绘图，绘制散点图叠加拟合曲线
+```
+

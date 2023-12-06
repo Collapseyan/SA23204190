@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="SA23204190" />
+
+
+<title>Homework3</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework3</h1>
+<h4 class="author">SA23204190</h4>
+<h4 class="date">2023-10-9</h4>
+
+
+
+<div id="question1" class="section level2">
+<h2>Question1</h2>
+<p>针对简单估计与分层估计： <span class="math display">\[Var(\hat{\theta}^M)=\frac{1}{Mk}\sum_{i=1}^{k}\delta_i^2+Var(\theta_I)=Var(\hat{\theta}^S)+Var(\theta_I)\]</span>
+其中<span class="math inline">\(\theta_i=E[g(U)|I=i],\delta_i^2=Var[g(U)|I=i]\)</span>,并且I服从集合<span class="math inline">\(\{1,...,k\}\)</span>上的均匀分布。
+求证如果g是(a,b)上连续函数，则有 <span class="math display">\[Var(\hat{\theta}^S)/Var(\hat{\theta}^M)
+\rightarrow 0\ 当b_i-a_i \rightarrow0\ 对于i=i,...,k\]</span></p>
+</div>
+<div id="answer1" class="section level2">
+<h2>Answer1</h2>
+<p>证明过程： <span class="math display">\[Var(\hat{\theta}^S)/Var(\hat{\theta}^M)=\frac{\sum_{i=1}^k\delta_i^2}{\sum_{i=1}^k\delta_i^2+kVar(\theta_I)}\]</span>
+<span class="math inline">\(b_i-a_i \rightarrow0\)</span>时候有<span class="math inline">\(k\rightarrow+\infty\)</span>,则分层估计与简单估计方差之比可以化简为：
+<span class="math display">\[\frac{\sum_{i=1}^k\delta_i^2}{\sum_{i=1}^k\delta_i^2+kVar(\theta_I)}\]</span>
+要证明方差之比趋于0，只需要证明<span class="math inline">\(\sum_{i=1}^k\delta_i^2&lt;+\infty,\
+k\rightarrow+\infty\)</span></p>
+</div>
+<div id="question2" class="section level2">
+<h2>Question2</h2>
+<p>找到两个被定义在<span class="math inline">\((1,+\infty)重要性函数\)</span>f_1,f_2<span class="math inline">\(。并且足够接近\)</span><span class="math inline">\(g(x)=\frac{x^2}{\sqrt{2\pi}}e^{-x^2/2},x&gt;1\)</span>$
+通过重要性采样计算哪一个重要性函数有更小的估计方差，给出解释。</p>
+</div>
+<div id="answer2" class="section level2">
+<h2>Answer2</h2>
+<p>解题过程： 首先选取两个重要性函数: <span class="math display">\[f_1=e^{-(x-1)},x&gt;1\]</span> <span class="math display">\[f_2=\frac{1}{2}e^{-\frac{1}{2}(x-1)},x&gt;1\]</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fl">1e6</span>;est<span class="ot">&lt;-</span>sd<span class="ot">&lt;-</span><span class="fu">numeric</span>(<span class="dv">2</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>g<span class="ot">&lt;-</span><span class="cf">function</span>(x){x<span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>pi)<span class="sc">^</span>(<span class="sc">-</span><span class="fl">0.5</span>)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.5</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span>)}<span class="sc">*</span>(x<span class="sc">&gt;</span><span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>f1<span class="ot">&lt;-</span><span class="cf">function</span>(x){<span class="fu">exp</span>(<span class="sc">-</span>(x<span class="dv">-1</span>))}</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>f2<span class="ot">&lt;-</span><span class="cf">function</span>(x){<span class="fl">0.5</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.5</span><span class="sc">*</span>(x<span class="dv">-1</span>))}</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">rexp</span>(m,<span class="dv">1</span>)<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>est[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">g</span>(x)<span class="sc">/</span><span class="fu">f1</span>(x))</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>sd[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">sd</span>(<span class="fu">g</span>(x)<span class="sc">/</span><span class="fu">f1</span>(x))</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">rexp</span>(m,<span class="fl">0.5</span>)<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>est[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">g</span>(x)<span class="sc">/</span><span class="fu">f2</span>(x))</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>sd[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">sd</span>(<span class="fu">g</span>(x)<span class="sc">/</span><span class="fu">f2</span>(x))</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">est=</span><span class="fu">round</span>(est,<span class="dv">3</span>), <span class="at">sd=</span><span class="fu">round</span>(sd,<span class="dv">3</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;f&#39;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  res</span></code></pre></div>
+<pre><code>##        f1    f2
+## est 0.401 0.401
+## sd  0.158 0.302</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="fl">0.01</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>w<span class="ot">&lt;-</span><span class="dv">2</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">plot</span>(x,<span class="fu">g</span>(x),<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.5</span>),<span class="at">lwd=</span> w,<span class="at">col=</span><span class="dv">1</span>,<span class="at">main =</span> <span class="st">&#39;(A)&#39;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="fu">f1</span>(x),<span class="at">lty=</span><span class="dv">2</span>,<span class="at">lwd=</span>w,<span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="fu">f2</span>(x),<span class="at">lty=</span><span class="dv">3</span>,<span class="at">lwd=</span>w,<span class="at">col=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAbFBMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6AGY6kNth0E9mAABmADpmAGZmOpBmZjpmZmZmtttmtv+QOgCQOmaQZgCQ2/+2ZgC2/7a2///bkDrb25Db2//b/9vb///fU2v/tmb/25D//7b//9v///9J8Oe6AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAHUUlEQVR4nO2dbYOiNhRGszuddrWva1u79EXU+f//sUBAQSUHhJA7zHM+rDLDBjkmNwQyN+5NBHGpP4B1JAiQIECCAAkCJAiQIECCAAkCJAiQIECCAAkCJAiQIECCAAkCJAiQIECCAAkCJAiQIECCAAkCJAiQIECCAAkCJAiQIECCALOCTttPf5avuXOfv5Vvjq/+dWHMCsrcy3/l694597V8c965Lwk+h1VBjY7TthD0XfWjRtmyWBWUu6aFffrl0sZ8VVoWq4Ky2srevfz9eqlMCdqYUUFFC6vaVSmleN+EowRtzKigQkwlqGppWd3c9i5BP2ZU0LFuVlWlaTYaUYtiW1Dx4qnalgRdqQVlruHrmwS18YKK8NxQRiQJuuKDdKGpCtWFqDI8K0hf8d18Vo8y6jfq5luU44q64rxVVana1IXihfw+3hxfE4Qgs4KK6nI78Mo1WG2T1WP4K3vd7mhz2t50WbphZhMJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQImFmQezekEjRvcfGQIECCgIUFjW/aqVENAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAggAJAiQIkCBAgoBIgpqEPr1/4v/BBWVNcoi8L0vExxZ03l20ZD15Rj62oNP2kpAl72lkH1uQahCRNTl9FIN6qHLzOtef6eijC1q6uHhIEBBbUBbuxQ7PlbogaafgHSQoXJwEQXESBMUd7BtK3IutUlBeh9n+lQeay8TADY/VCmpyyF9SEz/kvKNcj2sVdPqpfeLdrTbn3W3+0GePm5pYMSiHtT9WLOj8z6LHTc14Qaetbz3n36eklF2xoDrFdTYtb/yaBdWPLKblbL4UZ70feypIl4Ymrr/UEmTb0DOC9s79tpuYFn3FgurFqfK5YtD6BP3sq85cvZjxKpT+luu6BA0daow57qoEDRysznjc1ES53THncVOTPgYZR4KAp66D3PRGtmJB9YSE3H09bZ8fj3WOa7mnf+J+UH2zMHv5r29uy9jjrktQMzsq//ytb3bU6OOuSlAzO6qsQfMJMmtoSgzCO/PDj7sqQb4fKyrPfr4r6XUJinBcCYpcXDwkCEgsaDNvqRFIO8NsI0Hh4tqCjF4L2YlBEtRXXFOLbBpKL2gjQeHirnHIpKH0glpIUF9xG7v9vQQBNgQZxpIgk7XIkCDfzqwFakOC3mpBtgyZENTOUH4wZii9oNvx/caWoeSCvJqLIgnqFndtXN2VAOx0aGkFdVZHaBkydN2YWlDnZxbvNFoS1K5EVSCy4MmWoKuhsrc3MUIzJqhryPdmaS1ZE3TbypK3M3OCOobKf2tBqTRFEjQwh9nDNZAero2ULB7FETQ0h1nPIlFdQ92KtLSnKIIGZ6DqW0XrdvR6GXssX5GiCBqcw6x3mbF2Mzscbkf4S2qyWYNuAlGfoCU8xYpBw3KYhRaqexirO6IW8RSpFxuYwyy8kt/9Wn+Hw317u/M0ry9710Htne7WQ3wkqObq6cbXHB90zh3HFMdrQbp7SQ2Hh/Wpoa9eja1nsQWFc5gNWizT9XARdLPd/f1mU234O5XVAPhm+1Bvu7vtcec9Tw26np7fGv//eunzFdze1EJa/q7b485bT1bn2jFJcfFIO1h9B6QdrL4Dkg013g0xBA0YrE44DO8ySyFjK/nMNWjCYVYgaMBgdcJh1iCIB6sTDrMKQU8jQdMPI0GTd5GgJQqRoBl2mbD7x0OCAAkCJAiQIECCAAkCJAiQIECCAAkCJAiQIGABQdXTRr6HvQ/fxz2+Oge51TIHSTKPP1TPYnJXrW8wjPiCzrvi02R0csWnDgrKi982K1v0kBXHCS6MctpWD6vycr/BhuILOr6Wn5lSD562QUH+iVOwEJ+8b9/vMPePzH1Rgf26LBWD6CvLXv4ICTp+j984Ccrdl+px57Av7MJSgiD3YCEgGIPyz39tKZBhE/PPg73rwY+GFxIETxrLah8UVC0YQxkwMfhWVnxdHhyElhGUQ4wun2SHBX3ir72spMfX0BdhVhA9qa5qfVhQpcaHj75COLZYbWIZXQVl9ZSU/tP35xMM1QNqhtEgnQ1LcR6sQX7mTfBr9yce3CU32c2Hw8KV8JV0GaVa028eFjAsBpm7UKzbD34iGGrkPF7Z0y519cpsDTXeORIESBAgQYAEARIESBAgQYAEARIESBAgQYAEARIESBAgQYAEARIESBAgQYAEARIESBAgQYAEARIESBAgQYAEARIEWBdUzgQ7bUfmmpkT64LKSVNjkxXNinVB5QzpHwfPdoqAeUFve/wzj6jYFxSePB8d84LOu19HJpSbF/OCspd/w5NbI2NdUDlBemxOwlmxLmhfzY9OGKatC0qOBAESBEgQIEGABAESBEgQIEGABAESBEgQIEGABAESBEgQIEGABAESBEgQIEGABAESBEgQ8D8eFm1/qekyEgAAAABJRU5ErkJggg==" /><!-- --></p>
+<p>最终计算结果显示采用<span class="math inline">\(f_1\)</span>做估计的方差更小。原因是因为曲线<span class="math inline">\(f_1\)</span>比曲线<span class="math inline">\(f_2\)</span>更平行于<span class="math inline">\(g\)</span>的曲线</p>
+</div>
+<div id="question3" class="section level2">
+<h2>Question3</h2>
+<p>通过重要性采样的方法获得如下积分的蒙特卡洛估计：<span class="math display">\[\int_1^{+\infty}\frac{x^2}{\sqrt{2\pi}}e^{-x^2/2}dx\]</span></p>
+</div>
+<div id="answer3" class="section level2">
+<h2>Answer3</h2>
+<p>解题过程： 首先选取重要性函数： <span class="math display">\[f_1=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\]</span></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fl">1e7</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>g<span class="ot">&lt;-</span><span class="cf">function</span>(x){x<span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>pi)<span class="sc">^</span>(<span class="sc">-</span><span class="fl">0.5</span>)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.5</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span>)}<span class="sc">*</span>(x<span class="sc">&gt;</span><span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>f1<span class="ot">&lt;-</span><span class="cf">function</span>(x){(<span class="dv">2</span><span class="sc">*</span>pi)<span class="sc">^</span>(<span class="sc">-</span><span class="fl">0.5</span>)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.5</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span>)}</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">rnorm</span>(m)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;采用重要性采样方法得到的估计值为：&quot;</span>,<span class="fu">mean</span>(<span class="fu">g</span>(x)<span class="sc">/</span><span class="fu">f1</span>(x)))</span></code></pre></div>
+<pre><code>## [1] &quot;采用重要性采样方法得到的估计值为： 0.400782404383533&quot;</code></pre>
+</div>
+<div id="question4" class="section level2">
+<h2>Question4</h2>
+<p>获得习题5.13中的分层重要性抽样估计，并将其与习题5.10的结果进行比较。</p>
+</div>
+<div id="answer4" class="section level2">
+<h2>Answer4</h2>
+<p>解题过程： 对于习题5.13的积分<span class="math inline">\(\int_1^{\infty}\frac{x^2}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx\)</span>,积分域为<span class="math inline">\((1,+\infty)\)</span>，直接使用分层抽样比较困难，所以使用换元法做<span class="math inline">\(t=\frac{1}{x}\)</span>，则原积分变为： <span class="math display">\[\int_0^1
+\frac{1}{t^4\sqrt{2\pi}}e^{-\frac{1}{2t^2}}dt\]</span>
+然后使用分层抽样</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">10000</span>; k <span class="ot">&lt;-</span> <span class="dv">10</span> </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>r <span class="ot">&lt;-</span> M<span class="sc">/</span>k </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">50</span> </span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>T2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(k)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, N, <span class="dv">2</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>g<span class="ot">&lt;-</span><span class="cf">function</span>(x){x<span class="sc">^</span>(<span class="sc">-</span><span class="dv">4</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">*</span>pi)<span class="sc">^</span>(<span class="sc">-</span><span class="fl">0.5</span>)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fl">0.5</span><span class="sc">*</span>x<span class="sc">^</span>(<span class="sc">-</span><span class="dv">2</span>))<span class="sc">*</span>(x<span class="sc">&lt;</span><span class="dv">1</span>)<span class="sc">*</span>(x<span class="sc">&gt;</span><span class="dv">0</span>)}</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>     est[i, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">g</span>(<span class="fu">runif</span>(M)))</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>     <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k){T2[j]<span class="ot">&lt;-</span><span class="fu">mean</span>(<span class="fu">g</span>(<span class="fu">runif</span>(M<span class="sc">/</span>k,(j<span class="dv">-1</span>)<span class="sc">/</span>k,j<span class="sc">/</span>k)))}</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>     est[i, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(T2)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a> }</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">apply</span>(est,<span class="dv">2</span>,mean),<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.4012 0.4007</code></pre>
+</div>
+<div id="question5" class="section level2">
+<h2>Question5</h2>
+<p>假设使用95%对称t区间来估计一个均值，但样本数据不服从正态分布。那么均值落入置信区间的概率不一定等于0.95。使用蒙特卡罗实验估计t区间对<span class="math inline">\(\chi^2(2)\)</span>数据中大小为20的随机样本的覆盖率。将得到的t区间结果与例6.4中的模拟结果进行比较。(t区间和方差区间相比应该具有更稳定的正态性偏离)</p>
+</div>
+<div id="anwser5" class="section level2">
+<h2>Anwser5</h2>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fl">1e5</span>;k<span class="ot">&lt;-</span><span class="dv">1</span>;num<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="cf">while</span> (k<span class="sc">&lt;=</span>m) {</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  x<span class="ot">&lt;-</span><span class="fu">rchisq</span>(<span class="dv">20</span>,<span class="dv">2</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  x1<span class="ot">&lt;-</span><span class="fu">mean</span>(x)<span class="sc">-</span><span class="fu">sd</span>(x)<span class="sc">*</span><span class="dv">20</span><span class="sc">^</span>(<span class="sc">-</span><span class="fl">0.5</span>)<span class="sc">*</span><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">19</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  x2<span class="ot">&lt;-</span><span class="fu">mean</span>(x)<span class="sc">+</span><span class="fu">sd</span>(x)<span class="sc">*</span><span class="dv">20</span><span class="sc">^</span>(<span class="sc">-</span><span class="fl">0.5</span>)<span class="sc">*</span><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">19</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="cf">if</span>(<span class="dv">2</span><span class="sc">&lt;=</span>x2){</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>    <span class="cf">if</span>(<span class="dv">2</span><span class="sc">&gt;=</span>x1){</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>      num<span class="ot">&lt;-</span>num<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    }</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  }</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  k<span class="ot">&lt;-</span>k<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>}</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>prb<span class="ot">=</span>num<span class="sc">/</span>m</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>prb</span></code></pre></div>
+<pre><code>## [1] 0.91996</code></pre>
+<p>最终计算结果覆盖概率小于0.95，覆盖概率没有例6.4的计算结果好</p>
+</div>
+<div id="question6" class="section level2">
+<h2>Question6</h2>
+<p>当抽样总体非正态时，使用蒙特卡洛模拟来研究t检验的经验第一类错误率是否约等于理论显著性水平<span class="math inline">\(\alpha\)</span>。t检验对微小的正态性偏差是稳定的。讨论对下列抽样总体进行模拟的结果：(i)<span class="math inline">\(\chi^2(1)\)</span>;(ii)Uniform(0,2);(iii)Exponential(1)。在每种情况下检验<span class="math display">\[H_0:\mu=\mu_0,H_1:\mu \neq\mu_0\]</span>其中<span class="math inline">\(\mu_0\)</span>是对应的总体均值。</p>
+</div>
+<div id="answer6" class="section level2">
+<h2>Answer6</h2>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>alpha<span class="ot">&lt;-</span><span class="fl">0.05</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fl">1e5</span>;num1<span class="ot">&lt;-</span>num2<span class="ot">&lt;-</span>num3<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  x1<span class="ot">&lt;-</span><span class="fu">rchisq</span>(<span class="dv">20</span>,<span class="dv">1</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  x2<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">2</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  x3<span class="ot">&lt;-</span><span class="fu">rexp</span>(<span class="dv">20</span>,<span class="dv">1</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  T1<span class="ot">&lt;-</span><span class="dv">20</span><span class="sc">^</span>(<span class="fl">0.5</span>)<span class="sc">*</span>(<span class="fu">mean</span>(x1)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">sd</span>(x1)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  T2<span class="ot">&lt;-</span><span class="dv">20</span><span class="sc">^</span>(<span class="fl">0.5</span>)<span class="sc">*</span>(<span class="fu">mean</span>(x2)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">sd</span>(x2)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  T3<span class="ot">&lt;-</span><span class="dv">20</span><span class="sc">^</span>(<span class="fl">0.5</span>)<span class="sc">*</span>(<span class="fu">mean</span>(x3)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">sd</span>(x3)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(T1)<span class="sc">&gt;</span><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">19</span>)){</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    num1<span class="ot">&lt;-</span>num1<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  }</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(T2)<span class="sc">&gt;</span><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">19</span>)){</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>    num2<span class="ot">&lt;-</span>num2<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>  }</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(T3)<span class="sc">&gt;</span><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">19</span>)){</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    num3<span class="ot">&lt;-</span>num3<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>  }</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>}</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>c<span class="ot">&lt;-</span><span class="fu">c</span>(num1<span class="sc">/</span>m,num2<span class="sc">/</span>m,num3<span class="sc">/</span>m)</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;(i)(ii)(iii)的结果分别为：&quot;</span>,c[<span class="dv">1</span>],c[<span class="dv">2</span>],c[<span class="dv">3</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;(i)(ii)(iii)的结果分别为： 0.10761 0.05166 0.08391&quot;</code></pre>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

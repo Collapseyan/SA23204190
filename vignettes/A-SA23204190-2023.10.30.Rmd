@@ -1,0 +1,89 @@
+---
+title: "Homework6"
+author: "SA23204190"
+date: "2023-10-30"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework6}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+证明连续情形下的Metropolis-Hastings采样算法的稳定性。
+
+## Answer1
+
+证明：如果目标分布是连续情形，则有概率密度函数f，记Q为一转移分布函数，满足对所有x,$Q(X,\centerdot)$有转移核密度$q(\centerdot|x)$，那么从$Q(X,\centerdot)$中抽取一个样本y后，可以计算出来接受概率为：
+$$\alpha(x,y)=min\{1,\frac{f(y)q(x|y)}{f(x)q(y|x)}\}$$
+对所有的$(x,y)$，使得$f(x)q(y|x)>0$。从而有马尔科夫链转移核为：
+$$p(x,y)=q(y|x)\alpha(x,y)=q(y|x)min\{1,\frac{f(y)q(x|y)}{f(x)q(y|x)}\}$$
+所以
+$$p(x,y)f(x)=f(x)q(y|x)\alpha(x,y)=p(y,x)f(y)$$
+对细致平衡方程两边同时积分，则有
+$$\int p(x,y)f(x)dx=\int p(y,x)f(y)dx $$
+则有$f(y)=\int p(x,y)f(x)dx$
+由平稳分布的定义知道f是平稳分布。
+
+
+## Question2
+
+将等分布的两样本Cram´er-von Mises检验作为置换检验。将试验应用于例8.1和8.2中的数据。
+
+## Answer2
+
+解题过程：
+
+对于例题中的数据
+```{r}
+attach(chickwts)
+x <- sort(as.vector(weight[feed == "soybean"]))
+y <- sort(as.vector(weight[feed == "linseed"]))
+detach(chickwts)
+
+n<-length(x);m<-length(y)#各自数据的长度
+c1<-numeric(n);c2<-numeric(m)
+F<-ecdf(x);G<-ecdf(y)
+for (i in 1:n) {
+  c1[i]<-(F(x[i])-G(x[i]))^2
+}
+for (j in 1:m) {
+  c2[j]<-(F(y[j])-G(y[j]))^2
+}
+w2<-n*m/(m+n)^2*(sum(c1)+sum(c2))
+w2
+```
+
+## Question3
+
+第六章的6.4节中的Count five同分布检验基于端点个数的最大值。例题6.15显示Count five 标准对于大小不等的样本并不适用。基于端点最大值实现一个等方差的置换检验，并且样本大小未必相等。
+
+## Answer3
+
+解题过程：
+```{r}
+n1<-20;n2<-50
+mu1<-mu2<-0
+sigma1<-sigma2<-1
+reps<-numeric(1000)
+
+x<-rnorm(n1,mu1,sigma1);y<-rnorm(n2,mu2,sigma2)
+z<-c(x,y)
+tx<-sum(x>max(y))+sum(x<min(y))
+ty<-sum(y>max(x))+sum(y<min(x))
+
+for (i in 1000) {
+  xy<-sample(z)
+  x1<-xy[1:n1];y1<-xy[-(1:n1)]
+  outx<-sum(x1>max(y1))+sum(x1<min(y1))
+  outy<-sum(y1>max(x1))+sum(y1<min(x1))
+  reps[i]<-as.integer(max(c(outx,outy))>max(c(tx,ty)))
+}
+p<-mean(reps)
+paste("检验的p值为：",p)
+```

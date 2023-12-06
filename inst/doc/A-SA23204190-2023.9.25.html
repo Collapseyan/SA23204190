@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="SA23204190" />
+
+
+<title>Homework2</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework2</h1>
+<h4 class="author">SA23204190</h4>
+<h4 class="date">2023-9-25</h4>
+
+
+
+<div id="question1" class="section level2">
+<h2>Question1</h2>
+<p>在比丰投针问题中，证明<span class="math inline">\(\rho =
+\frac{l}{d}\)</span>取何值时，<span class="math inline">\(\pi\)</span>的估计量<span class="math inline">\(\hat{\pi}\)</span>的渐进方差最小。（<span class="math inline">\(m ~ B(n,p)\)</span>）</p>
+</div>
+<div id="answer1" class="section level2">
+<h2>Answer1</h2>
+<p>根据中心极限定理，<span class="math inline">\(\frac{(m-np)}{\sqrt{np(1-p)}}\stackrel{d}{\rightarrow}
+N(0,1)\)</span>。变形得到： <span class="math display">\[\sqrt{n}
+(\frac{m}{n}-p)\stackrel{d}{\rightarrow}N(0,p(1-p))\]</span> 再根据<span class="math inline">\(\delta\)</span>方法，得到： <span class="math display">\[\sqrt{n}
+(\frac{n}{m}-\frac{1}{p})\stackrel{d}{\rightarrow}N(0,\frac{1-p}{p^3})\]</span>
+<span class="math inline">\(p=\frac{2\rho}{\pi}\)</span> ,<span class="math inline">\(\pi\)</span>的估计量<span class="math inline">\(\hat{\pi}=\frac{2ln}{dm}\)</span>,则<span class="math inline">\(\hat{\pi}\)</span>的渐进方差为<span class="math inline">\(\pi^2(\frac{\pi}{2\rho}-1)\)</span>。则<span class="math inline">\(\rho\)</span>的值越大，渐进方差越小。但是<span class="math inline">\(\rho\)</span>必须小于等于1，因为当<span class="math inline">\(\rho\)</span>大于1时，比丰投针实验中会出现针与两条平行线相交的可能性，导致设计的实验不合理。综上所述<span class="math inline">\(\rho\)</span>取1时，渐进方差最小。</p>
+</div>
+<div id="question2" class="section level2">
+<h2>Question2</h2>
+<p>在比丰投针问题中选择三个不同的<span class="math inline">\(\rho\)</span>值，然后使用蒙特卡洛方法验证答案（<span class="math inline">\(m=10^6\)</span>,重复计算次数K=100）</p>
+</div>
+<div id="answer2" class="section level2">
+<h2>Answer2</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>K<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>pi1<span class="ot">=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>pi2<span class="ot">=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>pi3<span class="ot">=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">100</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="cf">while</span> (K<span class="sc">&lt;=</span><span class="dv">100</span>) {</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  l1 <span class="ot">&lt;-</span> <span class="dv">1</span>;l2<span class="ot">&lt;-</span><span class="dv">1</span>;l3<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  d1 <span class="ot">&lt;-</span> <span class="dv">1</span>;d2<span class="ot">&lt;-</span><span class="dv">2</span>;d3<span class="ot">&lt;-</span><span class="dv">3</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fl">1e6</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  X1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(m,<span class="dv">0</span>,d1<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  Y <span class="ot">&lt;-</span> <span class="fu">runif</span>(m,<span class="dv">0</span>,pi<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  pihat1 <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>l1<span class="sc">/</span>d1<span class="sc">/</span><span class="fu">mean</span>(l1<span class="sc">/</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sin</span>(Y)<span class="sc">&gt;</span>X1)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  X2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(m,<span class="dv">0</span>,d2<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  pihat2 <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>l2<span class="sc">/</span>d2<span class="sc">/</span><span class="fu">mean</span>(l2<span class="sc">/</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sin</span>(Y)<span class="sc">&gt;</span>X2)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  X3 <span class="ot">&lt;-</span> <span class="fu">runif</span>(m,<span class="dv">0</span>,d3<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  pihat3 <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>l3<span class="sc">/</span>d3<span class="sc">/</span><span class="fu">mean</span>(l3<span class="sc">/</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sin</span>(Y)<span class="sc">&gt;</span>X3)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  pi1[K]<span class="ot">&lt;-</span>pihat1</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  pi2[K]<span class="ot">&lt;-</span>pihat2</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>  pi3[K]<span class="ot">&lt;-</span>pihat3</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  K<span class="ot">&lt;-</span>K<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>}</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\r</span><span class="st">ho = 1时，方差为：&quot;</span>,<span class="fu">var</span>(pi1),<span class="st">&quot;</span><span class="sc">\r</span><span class="st">ho = 1/2时，方差为：&quot;</span>,<span class="fu">var</span>(pi2),<span class="st">&quot;</span><span class="sc">\r</span><span class="st">ho=1/3时，方差为：&quot;</span>,<span class="fu">var</span>(pi3))</span></code></pre></div>
+<pre><code>## [1] &quot;\rho = 1时，方差为： 7.07287047960807e-06 \rho = 1/2时，方差为： 1.92061415961531e-05 \rho=1/3时，方差为： 3.91772389117369e-05&quot;</code></pre>
+</div>
+<div id="question3" class="section level2">
+<h2>Question3</h2>
+<p>对于蒙特卡洛积分 <span class="math display">\[\theta=\int_0^1 e^x
+dx\]</span> 要求使用对偶变量方法计算该积分。计算<span class="math inline">\(Cov(e^U,e^{1-U})\)</span>和<span class="math inline">\(Var(e^U+e^{1-U})\)</span>,其中<span class="math inline">\(U\sim U(0,1)\)</span>。使用对偶变量法计算的<span class="math inline">\(\hat{\theta}\)</span>减少的方差的百分比是多少(与简单MC方法比较)</p>
+</div>
+<div id="answer3" class="section level2">
+<h2>Answer3</h2>
+<p>解题过程： <span class="math display">\[Cov(e^U,e^{1-U})=E(e^Ue^{1-U})-Ee^UEe^{1-U}=3e-e^2-1&lt;0\]</span>
+则<span class="math inline">\(e^U,e^{1-U}\)</span>负相关。</p>
+<p><span class="math display">\[Var(e^U+e^{1-U})=Var(e^U)+Var(e^{1-U})+2Cov(e^U,e^{1-U})=10e-3e^2-5\]</span>
+则<span class="math inline">\(\hat{\theta}=\frac{e^U+e^{1-U}}{2}\)</span>,<span class="math inline">\(Var\hat{\theta}=\frac{10e-3e^2-5}{4}\)</span>
+简单MC方法得到的<span class="math inline">\(\theta\)</span>估计量<span class="math inline">\(\theta_1=e^U,Var\theta_1=\frac{4e-e^2-3}{2}\)</span>
+则对偶变量方法得到的<span class="math inline">\(\hat{\theta}\)</span>的方差减少的百分比Percentage为
+<span class="math display">\[Percentage=1-\frac{Var(e^U+e^{1-U})}{2Var(e^U)}\]</span></p>
+<pre><code>## [1] &quot;计算结果为： 0.967670071434521&quot;</code></pre>
+</div>
+<div id="question4" class="section level2">
+<h2>Question4</h2>
+<p>承接上题，通过对偶变量方法和简单MC方法来做蒙特卡洛拟真估计<span class="math inline">\(\theta\)</span>。计算通过对偶变量方法计算得来的<span class="math inline">\(\hat{\theta}\)</span>的方差减小百分比的经验估计。与上一题得出的理论值作比较。</p>
+</div>
+<div id="answer4" class="section level2">
+<h2>Answer4</h2>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>U<span class="ot">&lt;-</span><span class="fu">runif</span>(m)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>U1<span class="ot">&lt;-</span><span class="fu">runif</span>(m<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>T1<span class="ot">&lt;-</span><span class="fu">exp</span>(U)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>T2<span class="ot">&lt;-</span>(<span class="fu">exp</span>(U1)<span class="sc">+</span><span class="fu">exp</span>(<span class="dv">1</span><span class="sc">-</span>U1))</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>perhat<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span><span class="fu">var</span>(T2)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">var</span>(T1))</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;仿真结果为：&quot;</span>,perhat)</span></code></pre></div>
+<pre><code>## [1] &quot;仿真结果为： 0.967231238820728&quot;</code></pre>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

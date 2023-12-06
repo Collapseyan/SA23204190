@@ -1,0 +1,100 @@
+---
+title: "Introduction to R-package"
+author: "SA23204190"
+date: "2023-12-4"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to R-package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+_SA23204190__ is a simple R package developed to be a final project for the 'Statistical Computing' course. Three functions are considered, namely, NR,gibbsR and gibbsC
+
+
+
+## NR
+
+description:Newton-Raphson method using R
+
+Parameter meanings：
+
+f:function of which we want to find a root
+
+df: derivative of f
+
+x0: initial guess
+
+return: Numerical solution of the equation
+
+Functions have tolerant parameters=1e-4 and Maximum Number Of Iterations=1e4
+
+The source R code for _NR_ is as follows:
+
+```{R}
+NR <- function(f,df,x0){
+  x< - x0
+  iter <- 0
+  
+  
+  while (abs(f(x)) > 1e-4 && iter < 1e4) {
+    x <- x-f(x)/df(x)
+    iter <- iter + 1 
+  }
+  
+  if (iter == 1e4) {  
+    stop("Did not converge")  
+    
+  } else {  
+    return(x) 
+  }  
+  
+}
+```
+
+
+## gibbsR
+
+description:A Gibbs sampler using R
+
+Parameter meanings：
+
+N the number of samples
+
+thin the number of between-sample random numbers
+
+
+The source R code for _gibbsR_ is as follows:
+```{r}
+gibbsR <- function(N, thin) {
+  mat <- matrix(nrow = N, ncol = 2)
+  x <- y <- 0
+  for (i in 1:N) {
+    for (j in 1:thin) {
+      x <- rgamma(1, 3, y * y + 4)
+      y <- rnorm(1, 1 / (x + 1), 1 / sqrt(2 * (x + 1)))
+    }
+    mat[i, ] <- c(x, y)
+  }
+  mat
+}
+```
+
+## gibbsC
+
+description A Gibbs sampler using Rcpp
+
+Parameter meanings:
+
+N: the number of samples
+
+thin: the number of between-sample random numbers
+
+return a random sample of size N
+

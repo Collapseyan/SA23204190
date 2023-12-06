@@ -1,0 +1,107 @@
+## ----setup, include=FALSE-----------------------------------------------------
+knitr::opts_chunk$set(echo = TRUE)
+
+## -----------------------------------------------------------------------------
+library(boot)
+set.seed(12345)#准备
+
+
+c<-aircondit$hours#数据向量
+boot.mle<-function(x,i){1/mean(x[i])}#生成1/lambda的mle的函数
+
+de<-boot(c,boot.mle,999)
+ci<-boot.ci(de,conf = 0.95,type = c("norm","basic","perc","bca"))
+
+
+
+## ----echo=FALSE---------------------------------------------------------------
+paste("norm下的置信区间为:[",ci$normal[2],",",ci$normal[3],"].")
+paste("basic下的置信区间为:[",ci$basic[4],",",ci$basic[5],"].")
+paste("percent下的置信区间为:[",ci$percent[4],",",ci$percent[5],"].")
+paste("bca下的置信区间为:[",mean(ci$bca[4]),",",mean(ci$bca[5]),"].")
+
+## -----------------------------------------------------------------------------
+library(DAAG)
+library(bootstrap)
+attach(scor)
+
+
+#先计算样本协方差矩阵的特征值，从而得出thetahat
+lambda<-eigen(cor(scor))
+thetahat<-max(lambda$values)/sum(lambda$values)
+
+#使用留一法计算新的thetastar
+n<-length(scor$mec)
+e<-numeric(n)
+for (k in 1:n) {
+  scor1<-scor[-k,]
+  lambdastar<-eigen(cor(scor1))
+  thetastar<-max(lambdastar$values)/sum(lambdastar$values)
+  e[k]<-thetastar-thetahat
+}
+round(c(bias=mean(e),sd=sd(e)),3)
+
+## -----------------------------------------------------------------------------
+library(DAAG)
+attach(ironslag)
+
+n<-length(ironslag$magnetic)
+e1<-e2<-e3<-e4<-matrix(NA,n,n)
+
+
+for (k in 1:(n-1)) {
+  
+  for (j in (k+1):n) {
+    x<-ironslag$magnetic[-c(k,j)]
+    y<-ironslag$chemical[-c(k,j)]
+    
+    #由于j>k，故可以使用e1[k,j]和e1[j,k]来储存两个保留数据与新模型的差值
+    J1<-lm(y ~ x)
+    yhat1<-J1$coefficients[1] + J1$coefficients[2] * ironslag$chemical[j]
+    e1[k,j]<-abs(yhat1 - ironslag$magnetic[j])
+    yhat11<-J1$coefficients[1]+J1$coefficients[2]*ironslag$chemical[k]
+    e1[j,k]<-abs(yhat11-ironslag$magnetic[k])
+    
+    
+    J2<-lm(y ~ x + I(x^2))
+    yhat2<-J2$coefficients[1]+J2$coefficients[2]*chemical[j]+J2$coefficients[3]*ironslag$chemical[j]^2
+    e2[k,j]<-abs(yhat2-ironslag$magnetic[j])
+    yhat21<-J2$coefficients[1]+J2$coefficients[2]*ironslag$chemical[k]+J2$coefficients[3]*ironslag$chemical[k]^2
+    e2[j,k]<-abs(yhat21-ironslag$magnetic[k])
+    
+    
+    J3<-lm(log(y) ~ x)
+    logyhat3 <- J3$coefficients[1] + J3$coefficients[2] * ironslag$chemical[k]
+    yhat3 <- exp(logyhat3)
+    e3[j,k] <- abs(ironslag$magnetic[k] - yhat3)
+    logyhat31 <- J3$coefficients[1] + J3$coefficients[2] * ironslag$chemical[j]
+    yhat31 <- exp(logyhat31)
+    e3[k,j] <- abs(ironslag$magnetic[j] - yhat31)
+    
+    J4 <- lm(log(y) ~ log(x))
+    logyhat4 <- J4$coefficients[1] + J4$coefficients[2] * log(ironslag$chemical[k])
+    yhat4 <- exp(logyhat4)
+    e4[j,k] <- abs(ironslag$magnetic[k] - yhat4)
+    logyhat41 <- J4$coefficients[1] + J4$coefficients[2] * log(ironslag$chemical[j])
+    yhat41 <- exp(logyhat41)
+    e4[k,j] <- abs(ironslag$magnetic[j] - yhat41)
+  }
+}
+for (k in 1:n) {
+  e1[k,k]<-0
+  e2[k,k]<-0
+  e3[k,k]<-0
+  e4[k,k]<-0
+}
+
+  sum1<-sum(rowSums(e1))
+  sum2<-sum(rowSums(e2))
+  sum3<-sum(rowSums(e3))
+  sum4<-sum(rowSums(e4))
+ round(c(J1=sum1,J2=sum2,J3=sum3,J4=sum4),2)
+  
+  
+  
+
+
+

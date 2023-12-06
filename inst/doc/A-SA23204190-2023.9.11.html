@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="SA23204190" />
+
+
+<title>Homework0</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework0</h1>
+<h4 class="author">SA23204190</h4>
+<h4 class="date">2023-9-11</h4>
+
+
+
+<div id="question1" class="section level2">
+<h2>Question1</h2>
+<p>在饲料养鸡增肥研究中，某研究所提出三种饲料配方，分别记为<span class="math inline">\(A_1,A_2,A_3\)</span>。为了比较三种饲料的效果，特选24只相似雏鸡随机均分为三组，每组各喂一种饲料，60天后观察它们的质量，结果如下表：(单位：g)</p>
+<pre><code>##   Feed  W.1  W.2  w.3  W.4   W.5  W.6  W.7  W.8
+## 1  A_1 1073 1009 1060 1001  1002 1012 1009 1028
+## 2  A_2 1107 1092  990 1109 10900 1074 1122 1001
+## 3  A_3 1093 1029 1080 1021  1022 1032 1029 1048</code></pre>
+<p>判断三种饲料对于鸡增肥效果是否相同。</p>
+</div>
+<div id="answer1" class="section level2">
+<h2>Answer1</h2>
+<p>解题思路：该问题为单因子试验下的方差分析问题。</p>
+<p>解题过程：对于三个因子水平<span class="math inline">\(A_1,A_2,A_3\)</span>,做如下假设：每个因子水平下，鸡重量服从方差相等的正态分布，记为<span class="math inline">\(N(\mu_i,\delta^2),i=1,2,3\)</span>，并且样本之间都是相互独立的。
+作假设检验：<span class="math display">\[H_0:\mu_1=\mu_2=\mu_3\]</span>
+检验统计量<span class="math inline">\(F=\frac{S_A/f_A}{S_e/f_e}\)</span>服从<span class="math inline">\(F(f_A,f_e)\)</span>。其中<span class="math inline">\(S_A\)</span>为因子偏差平方和，<span class="math inline">\(f_A\)</span>为其自由度；<span class="math inline">\(S_e\)</span>为误差偏差平方和，<span class="math inline">\(f_e\)</span>是其自由度。 使用r计算F统计量的值</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(reshape)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>data1<span class="ot">&lt;-</span> <span class="fu">melt</span>(dataWeight,<span class="at">id=</span><span class="st">&quot;Feed&quot;</span>)<span class="co">#数据整理</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>data1<span class="ot">&lt;-</span> data1[,<span class="sc">-</span><span class="dv">2</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>data1<span class="co">#数据展示，包括因子水平以及因子水平下鸡的重量</span></span></code></pre></div>
+<pre><code>##    Feed value
+## 1   A_1  1073
+## 2   A_2  1107
+## 3   A_3  1093
+## 4   A_1  1009
+## 5   A_2  1092
+## 6   A_3  1029
+## 7   A_1  1060
+## 8   A_2   990
+## 9   A_3  1080
+## 10  A_1  1001
+## 11  A_2  1109
+## 12  A_3  1021
+## 13  A_1  1002
+## 14  A_2 10900
+## 15  A_3  1022
+## 16  A_1  1012
+## 17  A_2  1074
+## 18  A_3  1032
+## 19  A_1  1009
+## 20  A_2  1122
+## 21  A_3  1029
+## 22  A_1  1028
+## 23  A_2  1001
+## 24  A_3  1048</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>aov.chick<span class="ot">=</span><span class="fu">aov</span>(value<span class="sc">~</span>Feed,<span class="at">data =</span> data1)<span class="co">#做单因子方差分析</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(aov.chick)<span class="do">##结果展示</span></span></code></pre></div>
+<pre><code>##             Df   Sum Sq Mean Sq F value Pr(&gt;F)
+## Feed         2  8537820 4268910    1.06  0.364
+## Residuals   21 84565891 4026947</code></pre>
+<pre><code>## [1] &quot;该检验的F统计量的值为： 1.06008592764086 ;对应的p值为： 0.364247421806196 。&quot;</code></pre>
+</div>
+<div id="question2" class="section level2">
+<h2>Question2</h2>
+<p>生成1000个服从<span class="math inline">\(U(0,1)\)</span>的随机数，从其出发得到一组分布函数是服从Exp(1)的随机样本，并且画出样本的直方图，同时叠加理论概率密度函数曲线</p>
+</div>
+<div id="answer2" class="section level2">
+<h2>Answer2</h2>
+<p>解题思路：随机数生成问题。使用逆变法，计算出Exp(1)分布函数的反函数：<span class="math inline">\(F^{-1}(x)=-\ln(1-x)\)</span>。则<span class="math inline">\(Y=F^{-1}(X)\)</span>即是满足分布函数服从Exp(1)的随机样本。（X指服从U(0,1)的随机样本）</p>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>u<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1000</span>)<span class="co">#生成1000个服从U(0,1)的随机数</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>x<span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>u)<span class="co">#x即是服从Exp(1)的随机样本</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">prob=</span>T,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>),<span class="at">main=</span><span class="fu">expression</span>(<span class="fu">f</span>(x)<span class="sc">==</span><span class="fu">exp</span>(<span class="sc">-</span>x)))</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">exp</span>(<span class="sc">-</span>x),<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">add=</span>T)<span class="co">#得到直方图与曲线</span></span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="question3" class="section level2">
+<h2>Question3</h2>
+<p>合金钢的强度y（单位：<span class="math inline">\(10^7Pa\)</span>）与合金钢中碳的含量x（单位：%）有关。现在收集一组关于合金钢强度y与碳含量x的数据如下，拟合出线性模型，并且画出散点图与拟合的曲线。</p>
+<pre><code>##       x    y
+## 1  0.10 42.0
+## 2  0.11 43.0
+## 3  0.12 45.0
+## 4  0.13 45.0
+## 5  0.14 45.0
+## 6  0.15 47.5
+## 7  0.16 49.0
+## 8  0.17 53.0
+## 9  0.18 50.0
+## 10 0.20 55.0
+## 11 0.21 55.0
+## 12 0.23 60.0</code></pre>
+</div>
+<div id="answer3" class="section level2">
+<h2>Answer3</h2>
+<p>解题思路：使用线性回归模型，做出模型后在散点图中叠加拟合直线。</p>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>sclm<span class="ot">&lt;-</span><span class="fu">lm</span>(y<span class="sc">~</span>x,<span class="at">data =</span> dataCarbon)<span class="co">#，根据问题中给出的数据集dataCarbon建立线性模型</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="fu">summary</span>(sclm)<span class="co">#线性模型结果展示</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x, data = dataCarbon)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.00449 -0.63600 -0.02401  0.71297  2.32451 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   28.083      1.567   17.92 6.27e-09 ***
+## x            132.899      9.606   13.84 7.59e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.309 on 10 degrees of freedom
+## Multiple R-squared:  0.9503, Adjusted R-squared:  0.9454 
+## F-statistic: 191.4 on 1 and 10 DF,  p-value: 7.585e-08</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(dataCarbon, <span class="fu">aes</span>(x, y))<span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> F)<span class="co">#绘图，绘制散点图叠加拟合曲线</span></span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

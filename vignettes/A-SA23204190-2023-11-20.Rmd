@@ -1,0 +1,155 @@
+---
+title: "Homework9"
+author: "SA23204190"
+date: "2023-11-20"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework9}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+为什么使用unlist()把表转化为原子向量，为什么不用as.vector()？
+
+## Answer1
+
+unlist()将表转化为一个向量，as.vector()可能会将表格分为多个向量。
+```{r}
+u<-list(1,2,3,4)
+x<-unlist(u)
+y<-as.vector(u)
+x
+y
+```
+
+## Question2
+
+对于dim()输入向量，返回值是什么？
+
+## Answer2
+
+NULL
+
+## Question3
+
+如果is.matrix(x)的返回值为TRUE,那么is.array(x)的返回值会是？
+
+## Answer3
+
+TRUE
+
+## Question4
+
+对于as.matrix()，输入一个包含不同数据类型的数据框，会输出什么？
+
+## Answer4
+
+输出一个数据类型为字符型的矩阵
+
+## Question5
+
+能够得到一个0行的数据框吗，0列呢？
+
+## Answer5
+
+可以
+```{r}
+test=matrix(data=NA,nrow = 0,ncol = 3)
+test=as.data.frame(test)
+colnames(test)=c("col1","col2","col3")
+test
+
+test2<-matrix(data = NA,nrow=3,ncol = 0)
+test2<-as.data.frame(test2)
+rownames(test2)=c("row1","row2","row3")
+test2
+```
+## Question6
+
+下面是一个数据缩放函数，如何将其应用到数据框的每一列，如何将其应用到数据框的每一数字列
+
+scale01 <- function(x) {
+rng <- range(x, na.rm = TRUE)
+(x - rng[1]) / (rng[2] - rng[1])
+}
+
+## Answer6
+```{r}
+
+scale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+d <- data.frame(
+     name=c("李明", "张聪", "王建"), 
+     age=c(30, 35, 28), 
+     height=c(180, 162, 175),
+     stringsAsFactors=FALSE)
+
+lapply(d[lapply(d,is.numeric)==TRUE],scale01)
+
+```
+
+
+## Question7
+
+使用vapply()
+a):计算数据框中每一列的标准差。
+b):计算混合数据框中每一个数字列的标准差。
+
+## Answer7
+
+```{r}
+#对于数据框
+d1<-data.frame(1:5,1:5)
+vapply(d1,sd,numeric(1))
+
+#针对混合数据框
+
+d <- data.frame(
+     name=c("李明", "张聪", "王建"), 
+     age=c(30, 35, 28), 
+     height=c(180, 162, 175),
+     stringsAsFactors=FALSE)
+vapply(d[lapply(d,is.numeric)==TRUE],sd,numeric(1))
+
+
+```
+## Question8
+
+现有二元密度函数
+$$f(x,y)\propto \begin{pmatrix} n \\ x \end{pmatrix}y^{x+\alpha-1}(1-y)^{n-x+b-1},\  x=0,1,...,n,0\leq y\leq 1 $$
+可以看出，对于固定的a,b,n,条件分布为Binomial(n,y)和Beta(x+a,n-x+b)，使用Gibbs样本生成器生成一个目标联合密度为f(x,y)的链条。
+
+## Answer8
+
+```{r}
+N<-5000
+burn<-1000
+X<-matrix(0,N,2)
+a<-b<-3;n<-100#固定a=3,b=3,n=100
+
+
+X[1,]<-c(1,0.5)
+for (i in 2:N) {
+  x2<-X[i-1,2]
+  X[i,1]<-rbinom(1,n,x2)
+  x1<-X[i,1]
+  X[i,2]<-rbeta(1,x1+a,n-x1+b)
+}
+
+b<-burn+1
+x<-X[b:N,]
+
+
+
+plot(x,main = "",cex=.5,xlab = bquote(X[1]),
+     ylab = bquote(X[2]),ylim = range(x[,2]))
+
+```

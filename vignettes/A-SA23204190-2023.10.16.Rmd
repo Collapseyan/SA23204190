@@ -1,0 +1,180 @@
+---
+title: "Homework4"
+author: "SA23204190"
+date: "2023-10-16"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+考虑m=1000个假设，其中前95%个原假设成立，后5%对立假设成立。在原假设之下，p-值服从U(0,1)分布，在对立假设之下，p-值服从$Beta(0.1,1)$分布(可以使用rbeta生成，应用Benferroni校正与B-H校正应用于生成的m个独立的p-值(应用p.adjust))。得到校正后的p-值，与$\alpha=0.1$比较确定是否拒绝原假设。基于M=1000次模拟，可以估计FWER,FDR,TPR,输出到表格中。
+
+## Answer1
+
+解题过程：
+```{r}
+set.seed(12345)
+TPR.BH<-numeric(1000)
+TPR.bonf<-numeric(1000)
+FDR.BH<-numeric(1000)
+FDR.bonf<-numeric(1000)
+VBH<-0;SBH<-0;UBH<-0;TBH<-0
+vbonf<-0;sbonf<-0;ubonf<-0;tbonf<-0
+for (i in 1:1000) {
+  x<-runif(950,0,1)
+  y<-rbeta(50,0.1,1)
+  p<-sort(c(x,y))
+  plocation<-order(c(x,y))
+  padj1<-p.adjust(p,method = "BH")
+  padj2<-p.adjust(p,method = "bonferroni")
+  for (j in 1:950) {
+    if(padj1[plocation[j]]<0.1){VBH<-VBH+1}
+    else{UBH<-UBH+1}
+  }
+  for (j in 951:1000) {
+    if(padj1[plocation[j]]<0.1){SBH<-SBH+1}
+    else{TBH<-TBH+1}
+  }
+   for (j in 1:950) {
+    if(padj2[plocation[j]]<0.1){vbonf<-vbonf+1}
+    else{ubonf<-ubonf+1}
+  }
+  for (j in 951:1000) {
+    if(padj2[plocation[j]]<0.1){sbonf<-sbonf+1}
+    else{tbonf<-tbonf+1}
+  }
+  TPR.BH[i]<-SBH/(SBH+TBH)
+  TPR.bonf[i]<-sbonf/(sbonf+tbonf)
+  FDR.BH[i]<-VBH/(VBH+SBH)
+  FDR.bonf[i]<-vbonf/(vbonf+sbonf)
+}
+
+round(c(TPR.BH=mean(TPR.BH),TPR.bonf=mean(TPR.bonf),FDR.BH=mean(FDR.BH),FDR.bonf=mean(FDR.bonf)),4)
+
+```
+
+## Question2
+
+假设总体是参数为$\lambda$的指数分布，则参数$\lambda$的MLE$\hat{\lambda}=\frac{1}{\bar{X}}$,其中$\bar{X}$为样本均值。可以得出$\hat{\lambda}$的期望为$\frac{n\lambda}{n-1}$,所以估计的偏差为$\frac{\lambda}{n-1}$。$\hat{\lambda}$的标准差为$\frac{n\lambda}{(n-1)\sqrt{n-2}}$。
+进行仿真研究以验证Bootstap方法的性能参数$\lambda=2$。样本大小n=5,10,20。bootstrap方法生成次数B=1000。模拟重复次数m=1000。bootstrap偏差均值与标准差与理论值作比较，并且解释结果。
+
+## Answer2
+
+解题过程：
+
+当n=5时候：
+```{r}
+set.seed(12345)
+m<-1000;B<-1000;n<-5;lambda<-2
+x<-rexp(n,2)
+hatlambda<-1/mean(x)
+se.samp<-2*n/(n-1)*(n-2)^{-0.5}
+lambdastar<-numeric(B)
+bias<-numeric(m)
+se.boot<-numeric(m)
+for (i in 1:m) {
+for (b in 1:B) {
+  xstar<-sample(x,replace = TRUE)
+  lambdastar[b]<-1/mean(xstar)
+
+}
+ bias[i]<-mean(lambdastar)-lambda
+ se.boot[i]<-sd(lambdastar)
+}
+
+round(c(bias=mean(bias),se.boot=mean(se.boot),se.samp=se.samp),3)
+
+
+```
+当n=10时
+```{r}
+mm<-1000;B<-1000;n<-10;lambda<-2
+x<-rexp(n,2)
+hatlambda<-1/mean(x)
+se.samp<-2*n/(n-1)*(n-2)^{-0.5}
+lambdastar<-numeric(B)
+bias<-numeric(m)
+se.boot<-numeric(m)
+for (i in 1:m) {
+for (b in 1:B) {
+  xstar<-sample(x,replace = TRUE)
+  lambdastar[b]<-1/mean(xstar)
+
+}
+ bias[i]<-mean(lambdastar)-lambda
+ se.boot[i]<-sd(lambdastar)
+}
+
+round(c(bias=mean(bias),se.boot=mean(se.boot),se.samp=se.samp),3)
+```
+当n=20时：
+```{r}
+m<-1000;B<-1000;n<-20;lambda<-2
+x<-rexp(n,2)
+hatlambda<-1/mean(x)
+se.samp<-2*n/(n-1)*(n-2)^{-0.5}
+lambdastar<-numeric(B)
+bias<-numeric(m)
+se.boot<-numeric(m)
+for (i in 1:m) {
+for (b in 1:B) {
+  xstar<-sample(x,replace = TRUE)
+  lambdastar[b]<-1/mean(xstar)
+
+}
+ bias[i]<-mean(lambdastar)-lambda
+ se.boot[i]<-sd(lambdastar)
+}
+
+round(c(bias=mean(bias),se.boot=mean(se.boot),se.samp=se.samp),3)
+```
+
+## Question3
+
+根据例题7.2，得到关性统计量的bootstrap t置信区间估计
+
+## Answer3
+
+解题过程：
+```{r}
+library(bootstrap)
+set.seed(12345)
+B<-1000
+alpha<-0.05
+se.theta<-0.115
+n<-nrow(law)
+theta<-cor(law[1],law[2])
+thetastar<-numeric(B)
+se.thetastar<-numeric(B)
+boot<-numeric(B)
+gpa<-numeric(B)
+for (i in 1:B) {
+  j<-sample(1:n,replace = TRUE)
+  last<-law$LSAT[j]
+  gpa<-law$GPA[j]
+  thetastar[i]<-cor(gpa,last)
+}
+
+for (i in 1:B) {
+  for (j in 1:B) {
+    k<-sample(1:n,replace = TRUE)
+    last<-law$LSAT[k]
+    gpa<-law$GPA[k]
+    boot[j]<-cor(last,gpa)
+  }
+  se.thetastar[i]<-sd(boot)
+}
+tstar<-unname(quantile((thetastar-theta)/se.thetastar,1-alpha/2))
+d1<-theta-tstar*se.theta
+d2<-theta+tstar*se.theta
+paste("最终得到的置信区间为[",d1,",",d2,"]")
+
+```

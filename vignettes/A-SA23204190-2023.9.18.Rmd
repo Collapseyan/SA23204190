@@ -1,0 +1,192 @@
+---
+title: "Homework1"
+author: "SA23204190"
+date: "2023-9-18"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+利用逆变换方法，复现函数sample的部分功能（replace=TRUE）。并且给出若干算例。
+
+## Answer1
+
+解题思路：第一步：首先根据给定的随机变量值与对应概率写出概率分布函数；第二步：然后在$F^{-1}(u)=\inf{\{x:F(x)\geq u\}}$意义下求概率分布函数的逆函数；第三步：生成数目为size的服从$U(0,1)$的随机数；第四步：对每个生成的随机数u，判断$F^{-1}(u)$的值，存入向量中。
+
+解题过程：
+```{r  echo=TRUE}
+my.sample<-function(x,size,Prob=rep(1/length(x),length(x))){
+  if(sum(Prob)!=1){
+    stop("输入的概率之和必须为1！")
+  }
+  if(length(x)!=length(Prob)){
+    stop("输入的x与Prob个数不对应！")
+  }
+  if(length(size)!=1){
+    stop("输入的size必须是一个数字！")
+  }
+  if(!is.numeric(size)){
+    stop("输入的size必须是数字型！")
+  }
+  n<-1:length(x)
+  u<-runif(size)
+  f<-cumsum(Prob)
+  output<-x[findInterval(u,f)+1]
+  return(output)
+}
+
+```
+
+算例一：
+
+给定向量x=(1,2,3,4)，并且指定向量x中每个元素的概率Prob=(0.1,0.1,0.2,0.6),利用编写的my.sample函数，生成10000个相应的随机样本。
+
+```{r echo=FALSE}
+set.seed(12345)
+x<-c(1,2,3,4);Prob<-c(0.1,0.1,0.2,0.6);n<-10000
+result1<-my.sample(x,n,Prob = Prob)
+print("结果中数字1的数目有：")
+summary(result1==1)
+print("结果中数字2的数目有：")
+summary(result1==2)
+print("结果中数字3的数目有：")
+summary(result1==3)
+print("结果中数字4的数目有：")
+summary(result1==4)
+```
+
+算例二：
+给定向量x=(1,2,3,4)，不指定概率向量,利用编写的my.sample函数，生成10000个相应的随机样本。
+
+```{r echo=FALSE}
+x<-c(1,2,3,4);n<-10000
+result2<-my.sample(x,n)
+print("结果中数字1的数目有：")
+summary(result2==1)
+print("结果中数字2的数目有：")
+summary(result2==2)
+print("结果中数字3的数目有：")
+summary(result2==3)
+print("结果中数字4的数目有：")
+summary(result2==4)
+```
+
+算例三：
+给定向量x=("a","b","c"),不指定概率向量，利用编写的my.sample函数，生成10000个相应的随机样本。
+
+```{r echo=FALSE}
+x<-c("a","b","c");n<-10000
+result3<-my.sample(x,n)
+print("结果中等于‘a’的数目有：")
+summary(result3=="a")
+print("结果中等于‘b’的数目有：")
+summary(result3=="b")
+print("结果中等于‘c’的数目有：")
+summary(result3=="c")
+```
+
+## Question2
+
+已知标准拉普拉斯分布的密度函数$f(x)=\frac{1}{2}e^{-|x|},x\in R$。使用逆变换法生成大小为1000的随机样本服从该分布。使用本章所示的方法之一将生成的样本与目标分布进行比较。
+
+## Answer2
+
+解题思路：由于标准拉普拉斯分布的分布函数为$$F(x)=\begin{cases} \frac{1}{2} e^x,x\leq 0\\
+1-\frac{1}{2}e^x,x>0
+\end{cases}$$得到反函数：$$F^{-1}(u)=\begin{cases}
+\ln{(2u)},u\leq \frac{1}{2}\\
+-\ln(2-2u),u> \frac{1}{2}
+\end{cases}$$
+根据反函数生成服从标准拉普拉斯分布的随机数。
+
+解题过程：
+```{r}
+u<-runif(1000)
+x<-ifelse(u<0.5,log(2*u),-log(2-2*u))
+hist(x,prob=TRUE,xlim=c(-10,10),main=expression(f(x)==0.5*exp(-abs(x))))
+curve(0.5*exp(-abs(x)),col="green",add=TRUE)
+```
+
+## Question3
+
+使用接受-拒绝法写出一个能够生成n个服从$Beta(a,b)$分布的随机数的函数my.beta。使用my.beta生成1000个服从$Beta(2,3)$分布的随机数，画出直方图并且叠加理论$Beta(2,3)$的密度函数曲线。
+
+## Answer3
+
+解题思路：对于my.beta函数应该有三个输入的参数，分别是生成的随机数数目n，和贝塔分布的两个参数x1,y1。首先我们选取g(x)=1，然后根据具体的贝塔参数算出来合适的c值，使用接受拒绝法，利用循环体不断生成随机数直到数目达到n
+
+解题过程：
+```{r echo=TRUE}
+my.beta<-function(n,x1,y1){
+  #n为生成的随机数数目，x1是贝塔分布的第一个参数，x2是贝塔分布的第二个参数。
+  y<-rep(0,n)#生成长度为n的初始向量y
+  k<-0 #k为计数器，记录生成的随机数的数目
+  c=(x1-1)^(x1-1) *(y1-1)^(y1-1) *(x1+y1-2)^(2-x1-y1) #根据两个参数算出合适的c值
+  while (k<n) {
+    u<-runif(1)
+    x<-runif(1)
+    parametor<- x^(x1-1) *(1-x)^(y1-1)
+    if(parametor/c >u){
+      k <- k+1
+      y[k] <- x
+    }
+  }
+  return(y) #返回最后结果
+}
+x<-my.beta(1000,2,3)
+hist(x,prob=TRUE,main=expression(f(x)==12*x(1-x)^2))
+curve(12*x*(1-x)^2,col="green",add=TRUE)
+```
+
+## Question4
+
+现有密度函数$f_e(x)=\frac{3}{4}(1-x^2)$。要求写出函数my.fe，能够生成指定数量n的服从密度函数为$f_e$随机数，并且做出大样本的直方图叠加密度函数曲线。
+
+## Answer4
+
+解题思路：
+
+解题过程：
+```{r}
+my.fe<-function(n){
+  #n为生成的随机数数目
+  y<-rep(0,n)#生成长度为n的初始向量y
+  k<-0 #k为计数器，记录生成的随机数的数目
+  while (k<n){
+    u<-runif(1,min=-1,max = 1)
+    x<-runif(1,min = -1,max = 1)
+    parametor<- 1-x^2
+    if(parametor >u){
+      k <- k+1
+      y[k] <- x
+    }
+  }
+  return(y) #返回最后结果
+}
+  x<-my.fe(1000)
+  hist(x,prob=TRUE,main=expression(f(x)==0.75(1-x^2)))
+  curve(0.75*(1-x^2),col="green",add=TRUE)
+```
+
+
+##Question5
+
+针对密度函数$f_e(x)=\frac{3}{4}(1-x^2)$，有人提出如下生成对应密度函数随机数方法：生成独立同分布随机变量$U_1,U_2,U_3$服从$U(-1,1)$，如果$|U_3|>|U_2|,|U_3|>|U_1|$则输入$U_2$,否则输入$U_3$。证明这种方法的正确性。
+
+##Answer5
+证明：设$U_1,U_2,U_3$是独立同分布的随机变量服从$U(-1,1)$。设函数$$U=\begin{cases}
+U_2,when|U_3| \geq |U_2| and |U_3| \geq |U_1| \\
+U_3,ohterwise
+\end{cases}$$
+我们只需证明U的密度函数与$f_e(x)$相同，即可证明结论。
+设$U_1,U_2,U_3$的次序统计量为$U_{(1)},U_{(2)},U_{(3)}$。则U等价于分别以$\frac{1}{2}$取$U_{(1)},U_{(2)}$。则U的分布函数为：$$\frac{1}{2}+\frac{3}{4}x-\frac{1}{4}x^3$$
+则U的密度函数为：$$\frac{3}{4}(1-x^2)$$
+与$f_e(x)$相同。故证毕。

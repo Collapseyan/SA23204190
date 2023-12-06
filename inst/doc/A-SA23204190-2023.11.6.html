@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="SA23204190" />
+
+
+<title>Homework7</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework7</h1>
+<h4 class="author">SA23204190</h4>
+<h4 class="date">2023-11-6</h4>
+
+
+
+<div id="question1" class="section level2">
+<h2>Question1</h2>
+<p>考虑模型<span class="math inline">\(P(Y=1|X_1,X_2,X_3)=\frac{exp\{a+b_1X_1+b_2X_2+b_3X_3\}}{1+exp\{a+b_1X_1+b_2X_2+b_3X_3\}}\)</span>,且<span class="math inline">\(X_1\)</span><sub><span class="math inline">\(P(1)\)</span>,<span class="math inline">\(X_2\)</span></sub>Exp(1),<span class="math inline">\(X_3\)</span>~B(1,0.5)</p>
+<p>设计一个函数，输入N,<span class="math inline">\(b_1,b_2,b_3,f_0\)</span>，然后输出a；</p>
+<p>调用该函数，给定初始值<span class="math inline">\(N=10^6,b_1=0,b_2=1,b_3=-1,f_0=0.1,0.01,0.001,0.0001\)</span>;</p>
+</div>
+<div id="answer1" class="section level2">
+<h2>Answer1</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>f1<span class="ot">&lt;-</span><span class="cf">function</span>(N,b1,b2,b3,f0){</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">rpois</span>(N,<span class="dv">1</span>) </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rexp</span>(N,<span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  x3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,N,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha){</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>alpha<span class="sc">-</span>b1<span class="sc">*</span>x1<span class="sc">-</span>b2<span class="sc">*</span>x2<span class="sc">-</span>b3<span class="sc">*</span>x3)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>tmp)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="fu">mean</span>(p)<span class="sc">-</span>f0</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  }</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  solution <span class="ot">&lt;-</span> <span class="fu">uniroot</span>(g,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>,<span class="dv">0</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">unlist</span>(solution),<span class="dv">5</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="fl">1e6</span>;b1<span class="ot">&lt;-</span><span class="dv">0</span>;b2<span class="ot">&lt;-</span><span class="dv">1</span>;b3<span class="ot">&lt;-</span><span class="sc">-</span><span class="dv">1</span>;f0<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.01</span>,<span class="fl">0.001</span>,<span class="fl">0.0001</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="fu">f1</span>(N,b1,b2,b3,f0[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>##     root   f.root     iter 
+## -3.16676  0.00000  7.00000</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">f1</span>(N,b1,b2,b3,f0[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>##     root   f.root     iter 
+## -6.06819  0.00000 10.00000</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">f1</span>(N,b1,b2,b3,f0[<span class="dv">3</span>])</span></code></pre></div>
+<pre><code>##     root   f.root     iter 
+## -8.71012  0.00000  8.00000</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">f1</span>(N,b1,b2,b3,f0[<span class="dv">4</span>])</span></code></pre></div>
+<pre><code>##      root    f.root      iter 
+## -11.29142   0.00000   9.00000</code></pre>
+</div>
+<div id="question2" class="section level2">
+<h2>Question2</h2>
+<p>实现一个随机游动Metropolis样本生成器来生成标准拉普拉斯的分布，通过一个正态分布来模拟增量，对由方差不同的建议分布所生成的链条做比较。此外计算每个链条的接受率</p>
+</div>
+<div id="answer2" class="section level2">
+<h2>Answer2</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>rw.Metropolis<span class="ot">&lt;-</span><span class="cf">function</span>(sigma,x0,N){</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  x<span class="ot">&lt;-</span><span class="fu">numeric</span>(N)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  x[<span class="dv">1</span>]<span class="ot">&lt;-</span>x0</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  u<span class="ot">&lt;-</span><span class="fu">runif</span>(N)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  k<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) {</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    y<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>,x[i<span class="dv">-1</span>],sigma)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="cf">if</span>(u[i]<span class="sc">&lt;=</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">abs</span>(y)<span class="sc">+</span><span class="fu">abs</span>(x[i<span class="dv">-1</span>]))){</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>      x[i]<span class="ot">&lt;-</span>y</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>      k<span class="ot">&lt;-</span>k<span class="sc">+</span><span class="dv">1</span>}</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>    <span class="cf">else</span>{</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>      x[i]<span class="ot">&lt;-</span>x[i<span class="dv">-1</span>]</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>     </span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>    }</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>  }</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">x=</span>x,<span class="at">k=</span>k))</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>}</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">2000</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>sigma<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.05</span>,<span class="fl">0.5</span>,<span class="dv">2</span>,<span class="dv">16</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>x0<span class="ot">&lt;-</span><span class="dv">10</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>rw1<span class="ot">&lt;-</span><span class="fu">rw.Metropolis</span>(<span class="at">sigma =</span> sigma[<span class="dv">1</span>],x0,N)</span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>rw2<span class="ot">&lt;-</span><span class="fu">rw.Metropolis</span>(<span class="at">sigma =</span> sigma[<span class="dv">2</span>],x0,N)</span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>rw3<span class="ot">&lt;-</span><span class="fu">rw.Metropolis</span>(<span class="at">sigma =</span> sigma[<span class="dv">3</span>],x0,N)</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>rw4<span class="ot">&lt;-</span><span class="fu">rw.Metropolis</span>(<span class="at">sigma =</span> sigma[<span class="dv">4</span>],x0,N)</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(rw1<span class="sc">$</span>k,rw2<span class="sc">$</span>k,rw3<span class="sc">$</span>k,rw4<span class="sc">$</span>k)<span class="sc">/</span>N)</span></code></pre></div>
+<pre><code>## [1] 0.9855 0.8195 0.5190 0.1015</code></pre>
+</div>
+<div id="question3" class="section level2">
+<h2>Question3</h2>
+<p>实现用Gibbs样本生成器来生成一个具有零均值、单位标准差和相关系数0.9的二元正态链条(<span class="math inline">\(X_t,Y_t\)</span>).去掉一个合适的训练样本后绘制生成的图像，对样本拟合出一个简单的线性回归模型<span class="math inline">\(Y=\beta_0+\beta_1X\)</span>,并且通过正态性和常值方差来检验模型的残差。</p>
+</div>
+<div id="answer3" class="section level2">
+<h2>Answer3</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">5000</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>burn<span class="ot">&lt;-</span><span class="dv">1000</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,N,<span class="dv">2</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>rho<span class="ot">&lt;-</span><span class="fl">0.9</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>mu1<span class="ot">&lt;-</span>mu2<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>sigma1<span class="ot">&lt;-</span>sigma2<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>s1<span class="ot">&lt;-</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>sigma1</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>s2<span class="ot">&lt;-</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>sigma2</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>X[<span class="dv">1</span>,]<span class="ot">&lt;-</span><span class="fu">c</span>(mu1,mu2)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N){</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>x2<span class="ot">&lt;-</span>X[i<span class="dv">-1</span>,<span class="dv">2</span>]</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>m1<span class="ot">&lt;-</span><span class="sc">+</span>rho<span class="sc">*</span>(x2 <span class="sc">-</span> mu2)<span class="sc">*</span>sigma1<span class="sc">/</span>sigma2</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>X[i,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>,m1,s1)</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>x1<span class="ot">&lt;-</span>X[i,<span class="dv">1</span>]</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>m2<span class="ot">&lt;-</span>mu2<span class="sc">+</span>rho<span class="sc">*</span>(x1<span class="sc">-</span>mu1)<span class="sc">*</span>sigma2<span class="sc">/</span>sigma1</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>X[i,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>,m2,s2)</span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>}</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>b<span class="ot">&lt;-</span>burn<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>x<span class="ot">&lt;-</span>X[b<span class="sc">:</span>N,]</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="fu">plot</span>(x)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">lm</span>(x[,<span class="dv">2</span>]<span class="sc">~</span>x[,<span class="dv">1</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">summary</span>(y)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = x[, 2] ~ x[, 1])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.56174 -0.30314  0.00238  0.28864  1.62268 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 0.0006102  0.0069258   0.088     0.93    
+## x[, 1]      0.9061163  0.0068147 132.964   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4379 on 3998 degrees of freedom
+## Multiple R-squared:  0.8156, Adjusted R-squared:  0.8155 
+## F-statistic: 1.768e+04 on 1 and 3998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="question4" class="section level2">
+<h2>Question4</h2>
+<p>参考例题9.1，使用<span class="math inline">\(Gelman-Rubin\)</span>方法监测链条的收敛性，<span class="math inline">\(\hat{R}&lt;1.2\)</span>运行链条直到其近似收敛到目标分布。使用“coda”程序包通过<span class="math inline">\(Gelman-Rubin\)</span>方法来检验链条收敛性。</p>
+</div>
+<div id="answer4" class="section level2">
+<h2>Answer4</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>Gelman.Rubin<span class="ot">&lt;-</span><span class="cf">function</span>(psi){</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>psi<span class="ot">&lt;-</span><span class="fu">as.matrix</span>(psi)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">ncol</span>(psi)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>k<span class="ot">&lt;-</span><span class="fu">nrow</span>(psi)</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>psi.means<span class="ot">&lt;-</span><span class="fu">rowMeans</span>(psi)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>B<span class="ot">&lt;-</span>n<span class="sc">*</span><span class="fu">var</span>(psi.means)</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>psi.w<span class="ot">&lt;-</span><span class="fu">apply</span>(psi,<span class="dv">1</span>,<span class="st">&quot;var&quot;</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>W<span class="ot">&lt;-</span><span class="fu">mean</span>(psi.w)</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>v.hat<span class="ot">&lt;-</span>W<span class="sc">*</span>(n<span class="dv">-1</span>)<span class="sc">/</span>n<span class="sc">+</span>(B<span class="sc">/</span>n)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>r.hat<span class="ot">&lt;-</span>v.hat<span class="sc">/</span>W</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="fu">return</span>(r.hat)</span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>}</span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>Rayleigh.chain<span class="ot">&lt;-</span><span class="cf">function</span>(sigma,N){</span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">numeric</span>(N)</span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>x[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>u<span class="ot">&lt;-</span><span class="fu">runif</span>(N)</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N){</span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>xt<span class="ot">&lt;-</span>x[i<span class="dv">-1</span>]</span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">1</span>,xt,sigma)</span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="cf">if</span>(u[i]<span class="sc">&lt;=</span>y<span class="sc">/</span>xt<span class="sc">*</span><span class="fu">exp</span>((<span class="sc">-</span>y<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>xt<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span><span class="sc">*</span>sigma<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>  x[i]<span class="ot">&lt;-</span>y</span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a>  <span class="cf">else</span>{</span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a>  x[i]<span class="ot">&lt;-</span>x[i<span class="dv">-1</span>]</span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a>  }</span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>}</span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="fu">return</span>(x)</span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>}</span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>sigma<span class="ot">&lt;-</span><span class="fl">0.2</span></span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>k<span class="ot">&lt;-</span><span class="dv">4</span></span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">15000</span></span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a>b<span class="ot">&lt;-</span><span class="dv">1000</span></span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">nrow=</span>k,<span class="at">ncol=</span>n)</span>
+<span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k) {</span>
+<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a>X[i,]<span class="ot">&lt;-</span><span class="fu">Rayleigh.chain</span>(sigma,n)</span>
+<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a>}</span>
+<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a>psi<span class="ot">&lt;-</span><span class="fu">t</span>(<span class="fu">apply</span>(X,<span class="dv">1</span>,cumsum))</span>
+<span id="cb14-43"><a href="#cb14-43" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(psi))</span>
+<span id="cb14-44"><a href="#cb14-44" tabindex="-1"></a>  psi[i,]<span class="ot">&lt;-</span>psi[i,]<span class="sc">/</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(psi))</span>
+<span id="cb14-45"><a href="#cb14-45" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">Gelman.Rubin</span>(psi))</span></code></pre></div>
+<pre><code>## [1] 2.028536</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>rhat<span class="ot">&lt;-</span><span class="fu">numeric</span>(n)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> (b<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>n){</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>rhat[j]<span class="ot">&lt;-</span><span class="fu">Gelman.Rubin</span>(psi[,<span class="dv">1</span><span class="sc">:</span>j])</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>}</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="fu">plot</span>(rhat[(b<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>n])</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fl">1.1</span>,<span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAWlBMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6AGY6kNtmAABmADpmAGZmZmZmtrZmtv+QOgCQZgCQkGaQ2/+2ZgC2/7a2///bkDrb/9vb////tmb/25D//7b//9v///8ickknAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAH/klEQVR4nO2di3qjNhBGaS6t3UvcLo27Tsz7v2YtRIhtjP6RNLIG/J/v243XETPmrBASCLnpSJCm9gewDgUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAigLahZDLUG64c4jx+0XDKdesEo4HzPx/z4cVL1glXBzx6xCXPWCVcIF2rTcwOoFa4RTamdvhlYvWCGc7uko8YMaFiTzk+hpBYJuOFCUtHxBM3uu5WjxggL7rKIoUtDn9iLH07t08+S8KE54h/MVRQt6O3vvUF2QYGczFS1bkHxPkxUtug2KbU9uewJbiEOPr447Hzi9+sTkDcWI9nO1mWTzBEFtlpnYvKEYSX4utsQR4gV9bjfRH+jGJ0uPMYmV90FAkBRBb6FyseHSI2SqFiqKF3TcvSR+pKS8swHy66KoMUpogw6NQhXKvkyjcqwKFKUcYkOsqmcxrbYMGlpoP6hEW3875DIFKfrpgKJFCtJpgG4GnIRN7wftq7VB6n66iaKzX4gjROWDw5GMfSvh5zLueewygvbN0Ns+NDPdbg1B6SFQ5LPoSf0gz3xv6Lgbteyff4JwsZTzc9NQrKBTL2joSJ+OorkD6Gw0MnfJKHn3SvrpLhX5N8Rb9n9//nG+v5f/+qZgDSrVAN3K0Kco1QYNVUi9DSru59pQobPY13hkpv4kC7qDnytDy+oo3sXPZR4KCibKui8m6knP9bfzLgOmbJySqouvQcdd3ggjZx/v6Mcn63+KNxh+6lxQTKlB5c/wN7NGF1S5oJglSCF9RFb1gj37ZhiK6LVBdfyU6ij+8uPUnrtjUU1QJT9lBPmhxnF36iZqCarTAHWFBH0NVtvnn+qCIrfLpmANOtG+KAmq5qdUGzRoOfUrVQTV81PuLOYPstl+5boFZUycis7bF67nZxGCavpZgqBqZ3ifPbrg3n/YU1fwLnkr+7Ffgyr7MS+oth/rgqr7sX3Jtanv596CovbYgh/LNciEn2UI0k0dh11BNvyYFWTj+OrSBPU3x2ZvKqvkNeMnfZ70Pm+sEc5rx0/STHt/ubDNqkPBvIb8JE3i9NfC8rrTobyW/CTVIH9rdW5qVI97ZOrjNTDmD+Q15SetDXLH2CHUBvV+fv0ReDRoPq8pPYVmd/RTqdu+okVPwTPmp9x9saEtj57EacxPoY6iqz37pBpkzU+ZWa6nKvT03leh2ZZqJq85P2XmSXfjbPPZuUSrFdRJZton57Xnx9hg1Z6f+NN85NIUUZMXDFag4oKuowQdGPST01EM9hVT8lqsQKbaIIt+Ukbzv/uujfpo3mQFyhCk/syqST/RgtrvBmh+jRPBkHaa12YFyqhBIfADC/OCpB/oThRqpOEDC5NwRitQiqCvAyhYSdADC9d5rfpJEeRmP790H6+qY7EVCXKXCw9uDr3mXQ2zfhLvanz89t7/Uctr1k/ifTF3JqOguYKuh9huVA8xu36STvPtS+AZg6S8KxOkntduE21MkG4KHRIE6S9VujJBOUuVNreOJst+EjuKunlXJ0j7sfCVCVJfqtS0n5Q2KHOYOsm7KkHRi5vgvJY7QZ2FfpBtPxmTOLXyrk6Q8lnMuJ+k2R2Cxke+uMn6BEnWk5YvbmK8iS7USEcsbmLdT7lJnA60uMl3l+HBBAkXN1mCn0L9INHiJs0DCxItbrIIPzV70hSEwi3BT3FBkrNYWuQ7cecadHVU2fdjYDRvnGqCFkMlQcGgt99WKKyRbw4KAsSNxb5raPDayKMKEq86/bCCpPeGHleQcNXpBxaUFZSCQFAKAkEpaI1QEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAggL6gA/5qBb/a51hw+iLE8EhkYGtRGCnqgtzyZsHFGN0OOEFjwemLEG4dtS64tSiMGG1BfpJVG7p0/bl1gsaC0xchDv6GSmBrURg52oL8Aw3BFVL2z3+fBI0Fpy8C4Q/Npp+NG9haEiYCdUFuJdPglOJTCdcGjQWnL8IZvKD5rYVhpGgL8gd/oAlwR4ATNBacvgAZ3K4HthaGkXJ3Qe6x80cWhCp4//tHPsRQEzl8CVXzlty6LryRFp1k2/TT/CBouad5UTetzegoDgfPYjuK/UEkG2qMBacvQgytS2BrURgpHKwCKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQB7gibzDvQmIqRAQQAKApgU9Ln9a+tX1XUzWf5xgtzMtI2fOKbz9QRSjAo6OXEr67qvsjg0wz8+Xjf99LG8bx+KxaigTT8N0U83bIc3+qlTh6d/BV/GqIhRQW/90rrjbDvfDPW+2vnvci+CaUH7UdDX3FjpAj16mBZ0VYMcx92fWhN8ZZgWNEx5Ht7o2T//p/LtBGJMC+pPXuNZzLfWb3qT6EXYFnTZD3LfMdhPQb9nM21PkDEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCDA/y3ySdImUp9XAAAAAElFTkSuQmCC" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

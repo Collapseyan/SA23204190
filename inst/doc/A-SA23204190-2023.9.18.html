@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="SA23204190" />
+
+
+<title>Homework1</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework1</h1>
+<h4 class="author">SA23204190</h4>
+<h4 class="date">2023-9-18</h4>
+
+
+
+<div id="question1" class="section level2">
+<h2>Question1</h2>
+<p>利用逆变换方法，复现函数sample的部分功能（replace=TRUE）。并且给出若干算例。</p>
+</div>
+<div id="answer1" class="section level2">
+<h2>Answer1</h2>
+<p>解题思路：第一步：首先根据给定的随机变量值与对应概率写出概率分布函数；第二步：然后在<span class="math inline">\(F^{-1}(u)=\inf{\{x:F(x)\geq
+u\}}\)</span>意义下求概率分布函数的逆函数；第三步：生成数目为size的服从<span class="math inline">\(U(0,1)\)</span>的随机数；第四步：对每个生成的随机数u，判断<span class="math inline">\(F^{-1}(u)\)</span>的值，存入向量中。</p>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>my.sample<span class="ot">&lt;-</span><span class="cf">function</span>(x,size,<span class="at">Prob=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(x),<span class="fu">length</span>(x))){</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">sum</span>(Prob)<span class="sc">!=</span><span class="dv">1</span>){</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;输入的概率之和必须为1！&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  }</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(x)<span class="sc">!=</span><span class="fu">length</span>(Prob)){</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;输入的x与Prob个数不对应！&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  }</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(size)<span class="sc">!=</span><span class="dv">1</span>){</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;输入的size必须是一个数字！&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  }</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.numeric</span>(size)){</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;输入的size必须是数字型！&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  }</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  n<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  u<span class="ot">&lt;-</span><span class="fu">runif</span>(size)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  f<span class="ot">&lt;-</span><span class="fu">cumsum</span>(Prob)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  output<span class="ot">&lt;-</span>x[<span class="fu">findInterval</span>(u,f)<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>}</span></code></pre></div>
+<p>算例一：</p>
+<p>给定向量x=(1,2,3,4)，并且指定向量x中每个元素的概率Prob=(0.1,0.1,0.2,0.6),利用编写的my.sample函数，生成10000个相应的随机样本。</p>
+<pre><code>## [1] &quot;结果中数字1的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    9012     988</code></pre>
+<pre><code>## [1] &quot;结果中数字2的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    9001     999</code></pre>
+<pre><code>## [1] &quot;结果中数字3的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    8027    1973</code></pre>
+<pre><code>## [1] &quot;结果中数字4的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    3960    6040</code></pre>
+<p>算例二：
+给定向量x=(1,2,3,4)，不指定概率向量,利用编写的my.sample函数，生成10000个相应的随机样本。</p>
+<pre><code>## [1] &quot;结果中数字1的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    7443    2557</code></pre>
+<pre><code>## [1] &quot;结果中数字2的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    7502    2498</code></pre>
+<pre><code>## [1] &quot;结果中数字3的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    7496    2504</code></pre>
+<pre><code>## [1] &quot;结果中数字4的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    7559    2441</code></pre>
+<p>算例三：
+给定向量x=(“a”,“b”,“c”),不指定概率向量，利用编写的my.sample函数，生成10000个相应的随机样本。</p>
+<pre><code>## [1] &quot;结果中等于‘a’的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    6727    3273</code></pre>
+<pre><code>## [1] &quot;结果中等于‘b’的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    6567    3433</code></pre>
+<pre><code>## [1] &quot;结果中等于‘c’的数目有：&quot;</code></pre>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical    6706    3294</code></pre>
+</div>
+<div id="question2" class="section level2">
+<h2>Question2</h2>
+<p>已知标准拉普拉斯分布的密度函数<span class="math inline">\(f(x)=\frac{1}{2}e^{-|x|},x\in
+R\)</span>。使用逆变换法生成大小为1000的随机样本服从该分布。使用本章所示的方法之一将生成的样本与目标分布进行比较。</p>
+</div>
+<div id="answer2" class="section level2">
+<h2>Answer2</h2>
+<p>解题思路：由于标准拉普拉斯分布的分布函数为<span class="math display">\[F(x)=\begin{cases} \frac{1}{2} e^x,x\leq 0\\
+1-\frac{1}{2}e^x,x&gt;0
+\end{cases}\]</span>得到反函数：<span class="math display">\[F^{-1}(u)=\begin{cases}
+\ln{(2u)},u\leq \frac{1}{2}\\
+-\ln(2-2u),u&gt; \frac{1}{2}
+\end{cases}\]</span> 根据反函数生成服从标准拉普拉斯分布的随机数。</p>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>u<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1000</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">ifelse</span>(u<span class="sc">&lt;</span><span class="fl">0.5</span>,<span class="fu">log</span>(<span class="dv">2</span><span class="sc">*</span>u),<span class="sc">-</span><span class="fu">log</span>(<span class="dv">2-2</span><span class="sc">*</span>u))</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">prob=</span><span class="cn">TRUE</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="dv">10</span>),<span class="at">main=</span><span class="fu">expression</span>(<span class="fu">f</span>(x)<span class="sc">==</span><span class="fl">0.5</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">abs</span>(x))))</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="fu">curve</span>(<span class="fl">0.5</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span><span class="fu">abs</span>(x)),<span class="at">col=</span><span class="st">&quot;green&quot;</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="question3" class="section level2">
+<h2>Question3</h2>
+<p>使用接受-拒绝法写出一个能够生成n个服从<span class="math inline">\(Beta(a,b)\)</span>分布的随机数的函数my.beta。使用my.beta生成1000个服从<span class="math inline">\(Beta(2,3)\)</span>分布的随机数，画出直方图并且叠加理论<span class="math inline">\(Beta(2,3)\)</span>的密度函数曲线。</p>
+</div>
+<div id="answer3" class="section level2">
+<h2>Answer3</h2>
+<p>解题思路：对于my.beta函数应该有三个输入的参数，分别是生成的随机数数目n，和贝塔分布的两个参数x1,y1。首先我们选取g(x)=1，然后根据具体的贝塔参数算出来合适的c值，使用接受拒绝法，利用循环体不断生成随机数直到数目达到n</p>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>my.beta<span class="ot">&lt;-</span><span class="cf">function</span>(n,x1,y1){</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  <span class="co">#n为生成的随机数数目，x1是贝塔分布的第一个参数，x2是贝塔分布的第二个参数。</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  y<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,n)<span class="co">#生成长度为n的初始向量y</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>  k<span class="ot">&lt;-</span><span class="dv">0</span> <span class="co">#k为计数器，记录生成的随机数的数目</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  c<span class="ot">=</span>(x1<span class="dv">-1</span>)<span class="sc">^</span>(x1<span class="dv">-1</span>) <span class="sc">*</span>(y1<span class="dv">-1</span>)<span class="sc">^</span>(y1<span class="dv">-1</span>) <span class="sc">*</span>(x1<span class="sc">+</span>y1<span class="dv">-2</span>)<span class="sc">^</span>(<span class="dv">2</span><span class="sc">-</span>x1<span class="sc">-</span>y1) <span class="co">#根据两个参数算出合适的c值</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>  <span class="cf">while</span> (k<span class="sc">&lt;</span>n) {</span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>    u<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>    x<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>    parametor<span class="ot">&lt;-</span> x<span class="sc">^</span>(x1<span class="dv">-1</span>) <span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x)<span class="sc">^</span>(y1<span class="dv">-1</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a>    <span class="cf">if</span>(parametor<span class="sc">/</span>c <span class="sc">&gt;</span>u){</span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a>      y[k] <span class="ot">&lt;-</span> x</span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a>    }</span>
+<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a>  }</span>
+<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a>  <span class="fu">return</span>(y) <span class="co">#返回最后结果</span></span>
+<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a>}</span>
+<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">my.beta</span>(<span class="dv">1000</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">prob=</span><span class="cn">TRUE</span>,<span class="at">main=</span><span class="fu">expression</span>(<span class="fu">f</span>(x)<span class="sc">==</span><span class="dv">12</span><span class="sc">*</span><span class="fu">x</span>(<span class="dv">1</span><span class="sc">-</span>x)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">12</span><span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x)<span class="sc">^</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">&quot;green&quot;</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="question4" class="section level2">
+<h2>Question4</h2>
+<p>现有密度函数<span class="math inline">\(f_e(x)=\frac{3}{4}(1-x^2)\)</span>。要求写出函数my.fe，能够生成指定数量n的服从密度函数为<span class="math inline">\(f_e\)</span>随机数，并且做出大样本的直方图叠加密度函数曲线。</p>
+</div>
+<div id="answer4" class="section level2">
+<h2>Answer4</h2>
+<p>解题思路：</p>
+<p>解题过程：</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>my.fe<span class="ot">&lt;-</span><span class="cf">function</span>(n){</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>  <span class="co">#n为生成的随机数数目</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>  y<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,n)<span class="co">#生成长度为n的初始向量y</span></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>  k<span class="ot">&lt;-</span><span class="dv">0</span> <span class="co">#k为计数器，记录生成的随机数的数目</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  <span class="cf">while</span> (k<span class="sc">&lt;</span>n){</span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>    u<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>    x<span class="ot">&lt;-</span><span class="fu">runif</span>(<span class="dv">1</span>,<span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>    parametor<span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>    <span class="cf">if</span>(parametor <span class="sc">&gt;</span>u){</span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>      y[k] <span class="ot">&lt;-</span> x</span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a>    }</span>
+<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>  }</span>
+<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>  <span class="fu">return</span>(y) <span class="co">#返回最后结果</span></span>
+<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>}</span>
+<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>  x<span class="ot">&lt;-</span><span class="fu">my.fe</span>(<span class="dv">1000</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>  <span class="fu">hist</span>(x,<span class="at">prob=</span><span class="cn">TRUE</span>,<span class="at">main=</span><span class="fu">expression</span>(<span class="fu">f</span>(x)<span class="sc">==</span><span class="fl">0.75</span>(<span class="dv">1</span><span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a>  <span class="fu">curve</span>(<span class="fl">0.75</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span>),<span class="at">col=</span><span class="st">&quot;green&quot;</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>##Question5</p>
+<p>针对密度函数<span class="math inline">\(f_e(x)=\frac{3}{4}(1-x^2)\)</span>，有人提出如下生成对应密度函数随机数方法：生成独立同分布随机变量<span class="math inline">\(U_1,U_2,U_3\)</span>服从<span class="math inline">\(U(-1,1)\)</span>，如果<span class="math inline">\(|U_3|&gt;|U_2|,|U_3|&gt;|U_1|\)</span>则输入<span class="math inline">\(U_2\)</span>,否则输入<span class="math inline">\(U_3\)</span>。证明这种方法的正确性。</p>
+<p>##Answer5 证明：设<span class="math inline">\(U_1,U_2,U_3\)</span>是独立同分布的随机变量服从<span class="math inline">\(U(-1,1)\)</span>。设函数<span class="math display">\[U=\begin{cases}
+U_2,when|U_3| \geq |U_2| and |U_3| \geq |U_1| \\
+U_3,ohterwise
+\end{cases}\]</span> 我们只需证明U的密度函数与<span class="math inline">\(f_e(x)\)</span>相同，即可证明结论。 设<span class="math inline">\(U_1,U_2,U_3\)</span>的次序统计量为<span class="math inline">\(U_{(1)},U_{(2)},U_{(3)}\)</span>。则U等价于分别以<span class="math inline">\(\frac{1}{2}\)</span>取<span class="math inline">\(U_{(1)},U_{(2)}\)</span>。则U的分布函数为：<span class="math display">\[\frac{1}{2}+\frac{3}{4}x-\frac{1}{4}x^3\]</span>
+则U的密度函数为：<span class="math display">\[\frac{3}{4}(1-x^2)\]</span> 与<span class="math inline">\(f_e(x)\)</span>相同。故证毕。</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

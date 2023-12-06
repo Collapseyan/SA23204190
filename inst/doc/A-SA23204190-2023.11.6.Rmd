@@ -1,0 +1,187 @@
+---
+title: "Homework7"
+author: "SA23204190"
+date: "2023-11-6"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework7}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+考虑模型$P(Y=1|X_1,X_2,X_3)=\frac{exp\{a+b_1X_1+b_2X_2+b_3X_3\}}{1+exp\{a+b_1X_1+b_2X_2+b_3X_3\}}$,且$X_1$~$P(1)$,$X_2$~Exp(1),$X_3$~B(1,0.5)
+
+设计一个函数，输入N,$b_1,b_2,b_3,f_0$，然后输出a；
+
+调用该函数，给定初始值$N=10^6,b_1=0,b_2=1,b_3=-1,f_0=0.1,0.01,0.001,0.0001$;
+
+
+
+## Answer1
+
+```{r}
+set.seed(12345)
+f1<-function(N,b1,b2,b3,f0){
+  x1 <- rpois(N,1) 
+  x2 <- rexp(N,1)
+  x3 <- sample(0:1,N,replace=TRUE)
+  g <- function(alpha){
+  tmp <- exp(-alpha-b1*x1-b2*x2-b3*x3)
+  p <- 1/(1+tmp)
+  mean(p)-f0
+  }
+  solution <- uniroot(g,c(-15,0))
+  round(unlist(solution),5)[1:3]
+}
+
+N<-1e6;b1<-0;b2<-1;b3<--1;f0<-c(0.1,0.01,0.001,0.0001)
+f1(N,b1,b2,b3,f0[1])
+f1(N,b1,b2,b3,f0[2])
+f1(N,b1,b2,b3,f0[3])
+f1(N,b1,b2,b3,f0[4])
+
+```
+
+
+## Question2
+
+实现一个随机游动Metropolis样本生成器来生成标准拉普拉斯的分布，通过一个正态分布来模拟增量，对由方差不同的建议分布所生成的链条做比较。此外计算每个链条的接受率
+
+## Answer2
+
+```{r}
+rw.Metropolis<-function(sigma,x0,N){
+  
+  x<-numeric(N)
+  x[1]<-x0
+  u<-runif(N)
+  k<-0
+  for (i in 2:N) {
+    y<-rnorm(1,x[i-1],sigma)
+    if(u[i]<=exp(-abs(y)+abs(x[i-1]))){
+      x[i]<-y
+      k<-k+1}
+    else{
+      x[i]<-x[i-1]
+     
+    }
+  }
+  return(list(x=x,k=k))
+}
+
+N=2000
+sigma<-c(0.05,0.5,2,16)
+x0<-10
+rw1<-rw.Metropolis(sigma = sigma[1],x0,N)
+rw2<-rw.Metropolis(sigma = sigma[2],x0,N)
+rw3<-rw.Metropolis(sigma = sigma[3],x0,N)
+rw4<-rw.Metropolis(sigma = sigma[4],x0,N)
+print(c(rw1$k,rw2$k,rw3$k,rw4$k)/N)
+
+```
+## Question3
+
+实现用Gibbs样本生成器来生成一个具有零均值、单位标准差和相关系数0.9的二元正态链条($X_t,Y_t$).去掉一个合适的训练样本后绘制生成的图像，对样本拟合出一个简单的线性回归模型$Y=\beta_0+\beta_1X$,并且通过正态性和常值方差来检验模型的残差。
+
+## Answer3
+```{r}
+N<-5000
+burn<-1000
+X<-matrix(0,N,2)
+rho<-0.9
+mu1<-mu2<-0
+sigma1<-sigma2<-1
+s1<-sqrt(1-rho^2)*sigma1
+s2<-sqrt(1-rho^2)*sigma2
+
+X[1,]<-c(mu1,mu2)
+for(i in 2:N){
+x2<-X[i-1,2]
+m1<-+rho*(x2 - mu2)*sigma1/sigma2
+X[i,1]<-rnorm(1,m1,s1)
+x1<-X[i,1]
+m2<-mu2+rho*(x1-mu1)*sigma2/sigma1
+X[i,2]<-rnorm(1,m2,s2)
+}
+b<-burn+1
+x<-X[b:N,]
+plot(x)
+y<-lm(x[,2]~x[,1])
+summary(y)
+```
+
+## Question4
+
+参考例题9.1，使用$Gelman-Rubin$方法监测链条的收敛性，$\hat{R}<1.2$运行链条直到其近似收敛到目标分布。使用“coda”程序包通过$Gelman-Rubin$方法来检验链条收敛性。
+
+
+## Answer4
+```{r}
+Gelman.Rubin<-function(psi){
+psi<-as.matrix(psi)
+n<-ncol(psi)
+k<-nrow(psi)
+
+psi.means<-rowMeans(psi)
+B<-n*var(psi.means)
+psi.w<-apply(psi,1,"var")
+W<-mean(psi.w)
+v.hat<-W*(n-1)/n+(B/n)
+r.hat<-v.hat/W
+return(r.hat)
+}
+
+Rayleigh.chain<-function(sigma,N){
+x<-numeric(N)
+x[1]<-1
+u<-runif(N)
+
+for(i in 2:N){
+xt<-x[i-1]
+y<-rnorm(1,xt,sigma)
+if(u[i]<=y/xt*exp((-y^2+xt^2)/2*sigma^2))
+  x[i]<-y
+  else{
+  x[i]<-x[i-1]
+  }
+}
+return(x)
+}
+
+sigma<-0.2
+k<-4
+n<-15000
+b<-1000
+
+
+X<-matrix(0,nrow=k,ncol=n)
+for (i in 1:k) {
+X[i,]<-Rayleigh.chain(sigma,n)
+}
+psi<-t(apply(X,1,cumsum))
+for(i in 1:nrow(psi))
+  psi[i,]<-psi[i,]/(1:ncol(psi))
+print(Gelman.Rubin(psi))
+
+rhat<-numeric(n)
+for(j in (b+1):n){
+rhat[j]<-Gelman.Rubin(psi[,1:j])
+}
+
+plot(rhat[(b+1):n])
+abline(h=1.1,lty=2)
+
+```
+
+
+
+
+
+
+

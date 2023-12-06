@@ -1,0 +1,105 @@
+---
+title: "Homework2"
+author: "SA23204190"
+date: "2023-9-25"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Homework2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question1
+
+在比丰投针问题中，证明$\rho = \frac{l}{d}$取何值时，$\pi$的估计量$\hat{\pi}$的渐进方差最小。（$m ~ B(n,p)$）
+
+
+## Answer1
+
+根据中心极限定理，$\frac{(m-np)}{\sqrt{np(1-p)}}\stackrel{d}{\rightarrow} N(0,1)$。变形得到：
+$$\sqrt{n} (\frac{m}{n}-p)\stackrel{d}{\rightarrow}N(0,p(1-p))$$
+再根据$\delta$方法，得到：
+$$\sqrt{n} (\frac{n}{m}-\frac{1}{p})\stackrel{d}{\rightarrow}N(0,\frac{1-p}{p^3})$$
+$p=\frac{2\rho}{\pi}$ ,$\pi$的估计量$\hat{\pi}=\frac{2ln}{dm}$,则$\hat{\pi}$的渐进方差为$\pi^2(\frac{\pi}{2\rho}-1)$。则$\rho$的值越大，渐进方差越小。但是$\rho$必须小于等于1，因为当$\rho$大于1时，比丰投针实验中会出现针与两条平行线相交的可能性，导致设计的实验不合理。综上所述$\rho$取1时，渐进方差最小。
+
+
+## Question2
+
+在比丰投针问题中选择三个不同的$\rho$值，然后使用蒙特卡洛方法验证答案（$m=10^6$,重复计算次数K=100）
+
+
+## Answer2
+
+```{r}
+set.seed(12345)
+K<-1
+pi1=rep(0,100)
+pi2=rep(0,100)
+pi3=rep(0,100)
+while (K<=100) {
+  l1 <- 1;l2<-1;l3<-1
+  d1 <- 1;d2<-2;d3<-3
+  m <- 1e6
+  X1 <- runif(m,0,d1/2)
+  Y <- runif(m,0,pi/2)
+  pihat1 <- 2*l1/d1/mean(l1/2*sin(Y)>X1)
+  X2 <- runif(m,0,d2/2)
+  pihat2 <- 2*l2/d2/mean(l2/2*sin(Y)>X2)
+  X3 <- runif(m,0,d3/2)
+  pihat3 <- 2*l3/d3/mean(l3/2*sin(Y)>X3)
+  pi1[K]<-pihat1
+  pi2[K]<-pihat2
+  pi3[K]<-pihat3
+  K<-K+1
+}
+paste("\rho = 1时，方差为：",var(pi1),"\rho = 1/2时，方差为：",var(pi2),"\rho=1/3时，方差为：",var(pi3))
+
+```
+
+
+
+## Question3
+
+
+对于蒙特卡洛积分
+$$\theta=\int_0^1 e^x dx$$
+要求使用对偶变量方法计算该积分。计算$Cov(e^U,e^{1-U})$和$Var(e^U+e^{1-U})$,其中$U\sim U(0,1)$。使用对偶变量法计算的$\hat{\theta}$减少的方差的百分比是多少(与简单MC方法比较)
+                                                                                                                                                                              
+## Answer3
+
+
+解题过程：
+$$Cov(e^U,e^{1-U})=E(e^Ue^{1-U})-Ee^UEe^{1-U}=3e-e^2-1<0$$
+则$e^U,e^{1-U}$负相关。
+
+$$Var(e^U+e^{1-U})=Var(e^U)+Var(e^{1-U})+2Cov(e^U,e^{1-U})=10e-3e^2-5$$
+则$\hat{\theta}=\frac{e^U+e^{1-U}}{2}$,$Var\hat{\theta}=\frac{10e-3e^2-5}{4}$
+简单MC方法得到的$\theta$估计量$\theta_1=e^U,Var\theta_1=\frac{4e-e^2-3}{2}$
+则对偶变量方法得到的$\hat{\theta}$的方差减少的百分比Percentage为
+$$Percentage=1-\frac{Var(e^U+e^{1-U})}{2Var(e^U)}$$
+```{r echo=FALSE}
+Percentage<-1-(10*exp(1)-3*exp(2)-5)/(4*exp(1)-3-exp(2))
+paste("计算结果为：",Percentage)
+```
+
+## Question4
+
+承接上题，通过对偶变量方法和简单MC方法来做蒙特卡洛拟真估计$\theta$。计算通过对偶变量方法计算得来的$\hat{\theta}$的方差减小百分比的经验估计。与上一题得出的理论值作比较。
+
+## Answer4
+
+解题过程：
+```{r}
+m <- 10000
+set.seed(12345)
+U<-runif(m)
+U1<-runif(m/2)
+T1<-exp(U)
+T2<-(exp(U1)+exp(1-U1))
+perhat<-1-var(T2)/(2*var(T1))
+paste("仿真结果为：",perhat)
+```
